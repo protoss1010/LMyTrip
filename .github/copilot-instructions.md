@@ -378,7 +378,11 @@ const CHECKLIST = {
 - [ ] Google Maps 外開連結使用 `maps.google.com/?q=` 格式（外開導航）
 - [ ] 地圖路線連結使用 `maps.google.com/maps/dir/` 格式
 - [ ] 地圖 embed 使用 `maps.google.com/maps?saddr=...&output=embed` 格式
+- [ ] embed URL 中的地點名稱要夠具體（加上縣市前綴或地址），確保 Google Maps 能正確定位路線
 - [ ] 參考部落格連結僅作延伸閱讀，頁面資訊本身完整
+- [ ] **禁止捏造部落格 URL**：bobowin.blog 使用日期格式 slug（如 `2017-03-04-11`），不是主題 slug（如 `qingshui-geothermal`）。必須先用 `web_fetch` 搜尋該部落格找到真實文章 URL，無法找到時改用 Google Maps 連結（`maps.google.com/?q=景點名`）或官方網站
+- [ ] 所有 `url` 欄位的連結都必須用 `curl -sL -o /dev/null -w "%{http_code}"` 驗證返回 200（Google Maps 連結除外，它們在瀏覽器中正常但 curl 可能返回非 200）
+- [ ] NEARBY 項目若無法找到真實部落格文章，使用 Google Maps 連結而非捏造 URL
 
 ### 完整性檢查
 - [ ] 包含所有 9 個區塊（Hero, Nav, Timeline, Map, Food, Nearby, Tips, Checklist, Footer）
