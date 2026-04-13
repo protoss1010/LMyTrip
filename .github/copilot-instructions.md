@@ -262,17 +262,38 @@ const MAP_DAY2 = { title: "Day 2：...", desc: "...", embed: "...", markers: [..
 
 ## 六、超連結規範
 
-### Google Maps 連結（導航用）
-```
-✅ https://maps.google.com/?q=景點名稱          （單點查詢）
-✅ https://maps.google.com/maps/dir/A/B/C/D      （多點路線）
-```
-這些是「開新分頁到 Google Maps」的連結，不是 iframe embed，永遠有效。
+### 🎯 核心原則：景點 url 欄位必須是「景點介紹網站」，禁止用 Google Maps
 
-### 外部參考連結
-- 優先使用**官方網站**（如 `.gov.tw`、品牌官網）
-- 次選**知名部落格**（如 bobowin.blog 等大型旅遊部落格）
-- 連結只作為「延伸閱讀」參考，頁面本身的資訊必須完整獨立
+TIMELINE 與 NEARBY 的 `url` 欄位是提供使用者「延伸閱讀、認識景點」的介紹網站，**禁止偷懶塞 `https://maps.google.com/?q=景點名`**（那是地圖導航，不是介紹）。Google Maps 連結只能用在 MAP_DATA.markers 的 `gm` 欄位與 MAP_DATA.url（那才是導航用途）。
+
+### ✅ `url` 欄位允許的連結類型（優先順序）
+
+| 優先級 | 類型 | 範例 |
+|--------|------|------|
+| 1️⃣ 最優先 | **官方網站 / 品牌官網** | `thsrc.com.tw`、`gloriaoutlets.com`、`ikea.com.tw`、`jlyes.com.tw`（夜市官方）、場館專屬官網 |
+| 2️⃣ 政府官方 | **`.gov.tw` 旅遊/文化網** | `travel.tycg.gov.tw/zh-tw/travel/attraction/<id>`（桃園觀光導覽網）、`taoyuan-parkgo.tw`（公園入口網） |
+| 3️⃣ 次選 | **知名旅遊部落格** | `bobowin.blog`、`yukiblog.tw`、`albertblog.tw`、`hsuanmom.tw`、`yoke918.tw`、`snoopyblog.com`、`tenjo.tw` 等 |
+| 4️⃣ 新聞媒體 | **主流媒體報導** | `udn.com`、`ltn.com.tw`、`mombaby.com.tw` 等正規媒體 |
+
+### 🔍 景點介紹網址搜尋流程（TIMELINE 與 NEARBY 每項必做）
+
+1. **用 `WebSearch` 搜尋 `<景點名> 介紹` 或 `<景點名> 官網`**，優先挑官方網站
+2. 沒官網時挑 `.gov.tw` 旅遊／觀光導覽頁
+3. 都沒有才挑知名部落格文章
+4. **必須用 `curl -sL -o /dev/null -w "%{http_code}" --max-time 10 "<url>"` 驗證回 200**
+5. 部分部落格（如 `albertblog.tw`、`saratrip.com`）對 curl UA 會回 403，瀏覽器卻能開 — **若 curl 擋了就改選其他來源**，不要賭
+6. **禁止捏造 URL**：bobowin.blog 有兩種 slug 格式（日期 `2017-02-06-29` 或主題 `pingzhen-sport-park`），都必須先 WebSearch 確認存在再使用
+
+### Google Maps 連結（只能用在地圖導航欄位）
+```
+✅ MAP_DATA.markers[i].gm: https://maps.google.com/?q=景點名稱   （外開單點導航）
+✅ MAP_DATA.url: https://maps.google.com/maps/dir/A/B/C/D        （外開多點路線）
+❌ 不得出現在 TIMELINE[i].url 或 NEARBY[i].url
+```
+
+### 連結定位原則
+- `url` 欄位是「**延伸閱讀**」給使用者更多景點資訊
+- 頁面本身的資訊（描述、tips、地址、電話、營業時間）必須完整獨立，不依賴外部連結
 
 ---
 
