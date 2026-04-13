@@ -198,7 +198,9 @@ function MapPanel({ data, color }) {
 const MAP_DATA = {
     title: "路線標題",
     desc: "路線描述",
-    embed: "https://maps.google.com/maps?saddr=起點&daddr=站1+to:站2+to:站3&dirflg=d&hl=zh-TW&output=embed",
+    embed: "https://maps.google.com/maps?saddr=25.0402,121.3874&daddr=24.6126,121.6367+to:24.6455,121.6124+to:24.6616,121.6216&dirflg=d&hl=zh-TW&output=embed",
+    // ⚠️ embed URL 必須使用經緯度座標，不要用中文地名（中文地名 Google Maps 可能無法解析導致路線不顯示）
+    // 使用 Nominatim API 查座標：https://nominatim.openstreetmap.org/search?q=景點名&format=json&limit=1&countrycodes=tw
     markers: [
         {
             gm: "https://maps.google.com/?q=景點名稱",  // Google Maps 連結（用於外開導航 + embed 單點切換）
@@ -378,7 +380,8 @@ const CHECKLIST = {
 - [ ] Google Maps 外開連結使用 `maps.google.com/?q=` 格式（外開導航）
 - [ ] 地圖路線連結使用 `maps.google.com/maps/dir/` 格式
 - [ ] 地圖 embed 使用 `maps.google.com/maps?saddr=...&output=embed` 格式
-- [ ] embed URL 中的地點名稱要夠具體（加上縣市前綴或地址），確保 Google Maps 能正確定位路線
+- [ ] **embed URL 必須使用經緯度座標**（如 `saddr=25.0402,121.3874&daddr=24.6126,121.6367+to:...`），不要用中文地名（中文地名可能導致路線無法顯示）
+- [ ] 座標透過 Nominatim API 查詢：`nominatim.openstreetmap.org/search?q=景點名&format=json&limit=1&countrycodes=tw`
 - [ ] 參考部落格連結僅作延伸閱讀，頁面資訊本身完整
 - [ ] **禁止捏造部落格 URL**：bobowin.blog 使用日期格式 slug（如 `2017-03-04-11`），不是主題 slug（如 `qingshui-geothermal`）。必須先用 `web_fetch` 搜尋該部落格找到真實文章 URL，無法找到時改用 Google Maps 連結（`maps.google.com/?q=景點名`）或官方網站
 - [ ] 所有 `url` 欄位的連結都必須用 `curl -sL -o /dev/null -w "%{http_code}"` 驗證返回 200（Google Maps 連結除外，它們在瀏覽器中正常但 curl 可能返回非 200）
