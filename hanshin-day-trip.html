@@ -59,6 +59,18 @@
             0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.2); }
             50% { box-shadow: 0 0 40px rgba(236, 72, 153, 0.4); }
         }
+
+        @media (max-width: 600px) {
+            html {
+                font-size: 18px
+            }
+        }
+
+        @media (max-width: 400px) {
+            html {
+                font-size: 19px
+            }
+        }
     </style>
 </head>
 
@@ -78,52 +90,52 @@
             bg2: "#0d2847",
         };
 
-        // ─── 行程資料（2大1小·林口A7自駕） ───
+        // ─── 行程資料 ───
         const TIMELINE = [
             {
-                time: "07:30", dur: "2小時", icon: "🚗", title: "林口A7出發·國道南下",
-                desc: "從林口桃園A7重劃區出發，走國道1號南下前往台中。車程約2小時，建議早點出發避開假日車潮。小朋友可以在車上先補眠。",
-                tag: "⚡ 國道1號南下約2hr", tt: "must",
-                tips: ["走國道1號→接台74線快速道路前往北屯", "假日建議07:30前出發避開車潮", "中途可在西湖服務區休息讓小孩活動", "導航設定「台中漢神洲際購物廣場」即可"]
+                time: "07:30", dur: "—", icon: "🚗", title: "林口A7出發",
+                desc: "帶齊裝備準備上車。從林口集合出發，帶著愉快的心情上高速公路前往台中。車程約2小時，出發啦！",
+                tag: "⚡ 集合準備出發", tt: "must",
+                tips: ["走國道1號→接台74線快速道路前往北屯", "中途可在西湖服務區稍作休息買咖啡", "導航設定「台中漢神洲際購物廣場」即可"]
             },
             {
-                time: "09:30", dur: "15分", icon: "🅿️", title: "抵達漢神洲際·停車",
+                time: "09:30", dur: "15分", trv: "🚗車行2hr", icon: "🅿️", title: "抵達漢神洲際·停車",
                 desc: "漢神洲際購物廣場設有大型停車場，開幕期間車位較緊張。建議從台74線下交流道後直接進入百貨停車場。帶小孩建議停B1方便推推車。",
                 tag: "🅿️ 百貨B1停車最方便", tt: "free",
                 tips: ["漢神洲際有大量停車位，消費可折抵", "善用「鏡頭君」即時查看停車場狀況", "推車族停B1有電梯直達各樓層"]
             },
             {
-                time: "10:00", dur: "2小時", icon: "🏬", title: "漢神洲際購物廣場",
-                desc: "百貨南霸天首座北部據點！6.6萬坪、近500品牌、6大米其林餐廳進駐。先去B1逛日本超市LOPIA搶A5和牛火鍋片跟豪邁壽司，再到5F親子樓層讓小孩在湯姆熊、Funbox玩具店放電。記得先下載 Hanshin Plus APP，全館消費滿5,000送500元商品券！",
+                time: "10:00", dur: "2小時", trv: "🚶進入百貨", icon: "🏬", title: "漢神洲際購物廣場",
+                desc: "百貨南霸天首座北部據點！6.6萬坪、近500品牌、6大米其林餐廳進駐。先去B1逛日本超市LOPIA搶A5和牛火鍋片跟豪邁壽司，再到5F親子樓層讓小孩在湯姆熊、Funbox玩具店放電。記得先下載 Hanshin Plus APP！",
                 tag: "⭐ 6大米其林·500品牌", tt: "must",
                 tips: ["B1必逛LOPIA日系超市（A5和牛、豪邁壽司、北海道起司蛋糕）", "5F親子樓層：Funbox玩具、TOMICA、嬰幼童用品", "6F湯姆熊遊樂場讓小孩放電", "開幕首年平日不限金額消費免費停車6小時！", "下載 Hanshin Plus APP → 全館滿5,000送500元電子商品券", "消費週週抽，滿2,000抽F1賽車城市雙人遊（至5/10）"]
             },
             {
-                time: "12:00", dur: "1.5小時", icon: "🍜", title: "午餐·百貨內必吃美食",
-                desc: "漢神洲際集結超過50家餐飲！推薦B1的「そらのいろ SORANOIRO」（東京車站米其林必比登拉麵·全台首家）或「漢來上海湯包」（米其林推薦），5F的「涓豆腐」韓式豆腐鍋小朋友也愛吃。想吃好一點可以去5F「漢來名人坊」（連續15年米其林星級粵菜）。",
+                time: "12:00", dur: "1.5小時", trv: "🚶走路3分", icon: "🍜", title: "午餐·百貨內必吃美食",
+                desc: "館內網羅50家知名餐飲！推薦B1必比登拉麵「そらのいろ」或「漢來上海湯包」，5F「涓豆腐」韓式豆腐鍋小朋友也會愛。",
                 tag: "🍴 6大米其林品牌在這裡", tt: "food",
                 tips: ["B1 そらのいろ：東京必比登拉麵，全台首家必吃！", "B1 漢來上海湯包：米其林推薦，小籠包超讚", "B1 一風堂、丸龜製麵、大戶屋：小朋友接受度高", "5F 涓豆腐：韓式嫩豆腐鍋，小孩也愛", "5F 漢來名人坊：米其林星級粵菜，適合慶祝", "5F Woosa鬆餅屋：飯後甜點首選", "建議11:45就入座避開12:00尖峰"]
             },
             {
-                time: "13:30", dur: "1.5小時", icon: "📚", title: "台中綠美圖",
-                desc: "由普立茲克建築獎得主妹島和世（SANAA）設計的台中綠美圖，結合「台中市立圖書館新總館」與「台中市立美術館」，白色通透的建築外觀如同漂浮在綠地上的森林，是台中最新的文化地標！帶小朋友來這裡看建築、逛繪本區、看展覽，寓教於樂。",
+                time: "13:30", dur: "1.5小時", trv: "🚗車行15分", icon: "📚", title: "台中綠美圖",
+                desc: "妹島和世設計的白色通透建築！結合圖書館與美術館，宛如漂浮森林的綠美圖是台中最新文化地標。帶小朋友來看建築、逛繪本區，寓教於樂。",
                 tag: "🌟 妹島和世設計·必訪", tt: "must",
-                tips: ["建築大師妹島和世（SANAA）操刀設計", "圖書館區有豐富的兒童繪本區", "美術館不定期有親子互動展覽", "建築本身就是最大的藝術品，很好拍！", "位於水湳經貿園區，從漢神洲際開車約15分鐘"]
+                tips: ["建築大師妹島和世（SANAA）操刀設計", "圖書館區有豐富的兒童繪本區", "美術館不定期有親子互動展覽", "建築本身就是最大的藝術品，很好拍！", "位於水湳經貿園區，從漢神洲際從A7開車約15分鐘"]
             },
             {
-                time: "15:00", dur: "1.5小時", icon: "🌳", title: "水湳中央公園·放電",
-                desc: "就在綠美圖旁邊！佔地67公頃的超大公園，有「台中之肺」的美稱。全台獨創的「12感官互動體驗設施」超有趣，還有飛碟造型攀爬遊具和全台最長32公尺雙軌滑索，小朋友玩到不想走！大草坪超遼闊，跑步放風箏都OK。",
+                time: "15:00", dur: "1.5小時", trv: "🚶走路5分", icon: "🌳", title: "水湳中央公園·放電",
+                desc: "佔地67公頃的台中之肺！獨創「12感官互動設施」、飛碟攀爬遊具和32公尺雙軌滑索，小朋友玩到不想走！大草坪也非常適合跑跳。",
                 tag: "🌳 67公頃·12感官體驗·免費", tt: "free",
                 tips: ["就在綠美圖旁邊，步行即可到達", "飛行美樂地：飛碟攀爬遊具＋32公尺雙軌滑索", "12感官互動設施全台獨創", "大草坪超級遼闊，小孩跑到累", "有抹茶湖、芒草區等打卡景點", "免費入場·全天開放"]
             },
             {
-                time: "16:45", dur: "1.5小時", icon: "🍲", title: "晚餐·食藝石頭火鍋（民權店）",
-                desc: "台中獨有的石頭火鍋名店！老闆會先用麻油在石鍋裡爆炒蒜頭、蔥段和你選的肉，炒到焦香四溢再加湯煮滾，這個「現炒」過程超有儀式感！食材自己從冰箱拿，盤子按顏色計價（$30~$80），豐儉由人。Google 4.8★高評價，只有台中才吃得到！",
+                time: "16:45", dur: "1.5小時", trv: "🚗車行15分", icon: "🍲", title: "晚餐·食藝石頭火鍋（民權店）",
+                desc: "台中超熱門道地火鍋！老闆會用麻油在石鍋爆炒肉片，香氣四溢超有儀式感，食材自取依盤計價，CP值極高。",
                 tag: "🔥 台中限定·石頭火鍋·4.8★", tt: "food",
                 tips: ["食藝石頭火鍋民權店：台中市西區民權路215號2樓", "電話 0906-397-010，現場候位制", "開鍋費$30/人，食材按盤子顏色計價$30~$80", "必體驗：麻油爆炒石頭鍋（老闆現場炒超香！）", "食材自取制：肉片、海鮮、蔬菜自己從冰箱拿", "每人消費約$250~500，CP值超高", "營業時間 17:00~23:00（下午才開門，注意時間！）"]
             },
             {
-                time: "18:15", dur: "2小時", icon: "🚗", title: "返程回林口A7",
+                time: "18:15", dur: "2小時", trv: "🚗車行2hr", icon: "🚗", title: "返程回林口A7",
                 desc: "吃飽後出發返程，走國道1號北上回林口A7。晚間車流較少，車程約2小時。小朋友通常在車上就睡著了，完美的一天！",
                 tag: "⚠️ 預計20:15到家", tt: "must",
                 tips: ["走台74線接國道1號北上", "晚間車流較少，車程約2小時", "中途可在清水服務區休息", "抵達預估時間約20:30"]
@@ -144,7 +156,7 @@
 
         // ─── 交通資訊（自駕為主） ───
         const TRANSPORT = [
-            { i: "🚗", t: "自駕路線（去程）", its: ["林口A7 → 國道1號南下", "接台74線快速道路往北屯", "下交流道直達漢神洲際", "車程約2小時（約170公里）"] },
+            { i: "🚗", t: "自駕路線（去程）", its: ["桃園市龜山區文青路（A7重劃區） → 國道1號南下", "接台74線快速道路往北屯", "下交流道直達漢神洲際", "車程約2小時（約170公里）"] },
             { i: "🛣️", t: "自駕路線（回程）", its: ["食藝石頭火鍋周邊 → 台74線", "接國道1號北上回林口", "晚間車流較少約2小時", "中途可在清水服務區休息"] },
             { i: "🅿️", t: "停車資訊", its: ["全館約6,600席（汽車2,500＋機車4,100）", "機車全面免費停車", "開幕首年平日不限金額免費停車6小時！", "假日消費滿$500抵1hr、滿$1,000抵2hr（最高6hr）", "三個停車場入口：P1西屯方向、P2北屯方向、P3市區方向"] },
             { i: "⛽", t: "油資與過路費", its: ["來回油資約NT$600~800", "國道過路費約NT$200來回", "建議出發前加滿油", "台中市區加油站多不用擔心"] }
@@ -155,7 +167,7 @@
             { i: "📱", t: "鏡頭君即時監控", its: ["台中市政府全國首創", "附近路口裝設即時影像", "可查看道路是否壅塞", "連停車場都看得到"] },
             { i: "🕐", t: "最佳造訪時間", its: ["平日人潮較少（週一~週四）", "避開開幕首週末", "建議早上10點前抵達", "午餐建議避開12:00~13:00"] },
             { i: "👶", t: "親子友善設施", its: ["漢神洲際多處哺乳室", "兒童遊戲區可放電", "嬰兒推車各處暢行", "綠美圖有兒童繪本區"] },
-            { i: "🚗", t: "長途開車提醒", its: ["出發前確認胎壓與油量", "準備小朋友車上玩具/平板", "中途服務區休息一下", "備妥暈車藥以防萬一"] },
+            { i: "🚗", t: "長途從A7開車提醒", its: ["出發前確認胎壓與油量", "準備小朋友車上玩具/平板", "中途服務區休息一下", "備妥暈車藥以防萬一"] },
             { i: "💳", t: "開幕優惠攻略", its: ["先下載 Hanshin Plus APP 加入會員", "全館滿$5,000送$500電子商品券（4/10~4/22）", "精品滿$10,000送$500、珠寶/家電滿$10,000送$1,000", "化妝品滿$2,000送$200（至5/10）", "消費滿$2,000週週抽F1賽車雙人遊（至5/10）"] },
             { i: "⚠️", t: "重要提醒", its: ["帶足小朋友的水和零食", "注意各景點營業時間", "綠美圖週一休館", "返程注意疲勞駕駛"] }
         ];
@@ -172,25 +184,25 @@
 
         // ─── 地圖資料（含自駕路線） ───
         const MAP_DATA = {
-            title: "林口A7 → 台中一日遊路線",
+            title: "桃園市龜山區文青路（A7重劃區） → 台中一日遊路線",
             desc: "從林口A7自駕出發，走國道1號南下，串聯漢神洲際（6大米其林·LOPIA）、綠美圖、水湳中央公園、食藝石頭火鍋的親子一日遊路線。",
             embed: "https://maps.google.com/maps?saddr=桃園市龜山區文青路（A7重劃區）&daddr=台中漢神洲際購物廣場+to:台中綠美圖+to:水湳中央公園+to:台中市西區民權路215號&dirflg=d&hl=zh-TW&output=embed",
             markers: [
-                { gm: "https://maps.google.com/?q=桃園市龜山區文青路", l: "林口桃園A7重劃區", e: "🏠", t: "07:30", addr: "桃園市龜山區文青路（A7重劃區）", hrs: "出發點", tk: "自駕出發", trs: "國道1號南下約2小時到台中", hl: ["從A7走國道1號南下最順", "假日建議07:30前出發", "中途西湖服務區可休息"], kt: "出發前先查國道路況，假日可能塞車！建議準備小朋友車上的玩具或平板。" },
+                { gm: "https://maps.google.com/?q=桃園市龜山區文青路", l: "桃園市龜山區文青路（A7重劃區）", e: "🏠", t: "07:30", addr: "桃園市龜山區文青路（A7重劃區）", hrs: "出發點", tk: "自駕出發", trs: "國道1號南下約2小時到台中", hl: ["從A7走國道1號南下最順", "假日建議07:30前出發", "中途西湖服務區可休息"], kt: "出發前先查國道路況，假日可能塞車！建議準備小朋友車上的玩具或平板。" },
                 { gm: "https://maps.google.com/?q=台中漢神洲際購物廣場", l: "漢神洲際購物廣場", e: "🏬", t: "10:00", addr: "台中市北屯區", hrs: "11:00~22:00", tk: "6.6萬坪・近500品牌", trs: "從A7開車約2小時", hl: ["百貨南霸天漢神百貨首座北部據點", "台中最大規模百貨誕生", "親子樓層有兒童遊戲區"], kt: "開幕人潮極多，B1停車場最方便推推車！善用「鏡頭君」查看即時路況。" },
-                { gm: "https://maps.google.com/?q=台中綠美圖", l: "台中綠美圖", e: "📚", t: "13:30", addr: "台中市西屯區館前路1號（水湳經貿園區）", hrs: "10:00~20:00（週一休館）", tk: "圖書館免費・美術館依展覽", trs: "從漢神洲際開車約15分鐘", hl: ["普立茲克獎得主妹島和世（SANAA）設計", "圖書館＋美術館雙館合一", "白色通透建築如漂浮森林", "兒童繪本區非常豐富"], kt: "妹島和世操刀的國際級建築！圖書館免費參觀，有超棒的兒童繪本區。週一休館要注意！" },
-                { gm: "https://maps.google.com/?q=水湳中央公園", l: "水湳中央公園", e: "🌳", t: "15:00", addr: "台中市西屯區中科路（水湳經貿園區）", hrs: "全天開放", tk: "免費入場", trs: "綠美圖旁邊步行即到", hl: ["67公頃超大公園·台中之肺", "飛行美樂地：飛碟攀爬遊具＋32公尺滑索", "12感官互動設施全台獨創", "大草坪讓小朋友盡情奔跑"], kt: "就在綠美圖旁邊不用開車！飛行美樂地遊具小朋友超愛，記得帶防曬。" },
-                { gm: "https://maps.google.com/?q=台中市西區民權路215號", l: "食藝石頭火鍋（民權店）", e: "🍲", t: "16:45", addr: "台中市西區民權路215號2樓", hrs: "17:00~23:00（每日營業）", tk: "開鍋費$30·每人約$250~500", trs: "從中央公園開車約15分鐘", hl: ["台中獨有的石頭火鍋名店", "老闆現場麻油爆炒超香超有儀式感", "食材自取制·按盤顏色計價$30~$80", "Google 4.8★·在地人激推"], kt: "17:00才營業，建議提早到！電話 0906-397-010。現場候位制，假日可能要等。藏在二樓要注意找一下！" },
+                { gm: "https://maps.google.com/?q=台中綠美圖", l: "台中綠美圖", e: "📚", t: "13:30", addr: "台中市西屯區館前路1號（水湳經貿園區）", hrs: "10:00~20:00（週一休館）", tk: "圖書館免費・美術館依展覽", trs: "從漢神洲際從A7開車約15分鐘", hl: ["普立茲克獎得主妹島和世（SANAA）設計", "圖書館＋美術館雙館合一", "白色通透建築如漂浮森林", "兒童繪本區非常豐富"], kt: "妹島和世操刀的國際級建築！圖書館免費參觀，有超棒的兒童繪本區。週一休館要注意！" },
+                { gm: "https://maps.google.com/?q=水湳中央公園", l: "水湳中央公園", e: "🌳", t: "15:00", addr: "台中市西屯區中科路（水湳經貿園區）", hrs: "全天開放", tk: "免費入場", trs: "綠美圖旁邊步行即到", hl: ["67公頃超大公園·台中之肺", "飛行美樂地：飛碟攀爬遊具＋32公尺滑索", "12感官互動設施全台獨創", "大草坪讓小朋友盡情奔跑"], kt: "就在綠美圖旁邊不用從A7開車！飛行美樂地遊具小朋友超愛，記得帶防曬。" },
+                { gm: "https://maps.google.com/?q=台中市西區民權路215號", l: "食藝石頭火鍋（民權店）", e: "🍲", t: "16:45", addr: "台中市西區民權路215號2樓", hrs: "17:00~23:00（每日營業）", tk: "開鍋費$30·每人約$250~500", trs: "從中央公園從A7開車約15分鐘", hl: ["台中獨有的石頭火鍋名店", "老闆現場麻油爆炒超香超有儀式感", "食材自取制·按盤顏色計價$30~$80", "Google 4.8★·在地人激推"], kt: "17:00才營業，建議提早到！電話 0906-397-010。現場候位制，假日可能要等。藏在二樓要注意找一下！" },
             ],
-            url: "https://maps.google.com/maps/dir/桃園市龜山區文青路/台中漢神洲際購物廣場/台中綠美圖/水湳中央公園/台中市西區民權路215號"
+            url: "https://maps.google.com/maps/dir/台中漢神洲際購物廣場/台中綠美圖/水湳中央公園/台中市西區民權路215號"
         };
 
         // ─── 打包清單 ───
         const CHECKLIST = {
-            "📱 數位裝備": ["手機充飽電（導航＋查路況）", "行動電源（逛一天很耗電）", "車充線（長途開車必備）", "先下載 Hanshin Plus APP（滿額贈用）", "食藝石頭火鍋17:00才營業·建議提早到"],
+            "📱 數位裝備": ["手機充飽電（導航＋查路況）", "行動電源（逛一天很耗電）", "車充線（長途從A7開車必備）", "先下載 Hanshin Plus APP（滿額贈用）", "食藝石頭火鍋17:00才營業·建議提早到"],
             "👶 親子必備": ["嬰兒推車（百貨逛街必備）", "兒童水壺與小零食", "換洗衣物備用一套", "車上玩具/平板（2小時車程用）", "小朋友慣用的餐具"],
             "👕 穿著建議": ["舒適好走的鞋（走很多路）", "薄外套（百貨冷氣很強）", "防曬用品（戶外景點用）", "輕便雨具（台中天氣多變）"],
-            "🚗 開車準備": ["確認胎壓與油量", "準備暈車藥（以防小朋友）", "面紙與濕紙巾多帶", "垃圾袋（車上用）", "停車零錢備用"]
+            "🚗 從A7開車準備": ["確認胎壓與油量", "準備暈車藥（以防小朋友）", "面紙與濕紙巾多帶", "垃圾袋（車上用）", "停車零錢備用"]
         };
 
         const ts = { free: { b: "rgba(45,212,191,0.15)", c: "#2dd4bf" }, must: { b: "rgba(236,72,153,0.15)", c: "#ec4899" }, food: { b: "rgba(249,115,22,0.15)", c: "#f97316" } };
@@ -199,21 +211,22 @@
         function TimelineCard({ ev, index, color }) {
             const [expanded, setExpanded] = useState(false);
             return (
-                <div style={{ display: "flex", gap: "0.7rem", padding: "0.65rem 0", borderBottom: "1px solid rgba(255,255,255,0.04)", flexWrap: "wrap", cursor: "pointer" }} onClick={() => setExpanded(!expanded)}>
-                    <div style={{ minWidth: 46, paddingTop: 2, flexShrink: 0 }}>
-                        <div style={{ fontSize: "0.75rem", fontWeight: 800, color: color }}>{ev.time}</div>
-                        {ev.dur && <div style={{ fontSize: "0.52rem", color: "rgba(255,255,255,0.35)", marginTop: 4, background: "rgba(255,255,255,0.06)", padding: "1px 4px", borderRadius: 4, display: "inline-block" }}>停留 {ev.dur}</div>}
+                <div style={{ display: "flex", gap: "0.7rem", padding: "0.65rem 0", borderBottom: "1px solid rgba(255,255,255,0.04)", cursor: "pointer" }} onClick={() => setExpanded(!expanded)}>
+                    <div style={{ minWidth: 56, paddingTop: 2, flexShrink: 0 }}>
+                        <div style={{ fontSize: "0.95rem", fontWeight: 800, color: color }}>{ev.time}</div>
+                        {ev.dur && <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", marginTop: 4, background: "rgba(255,255,255,0.06)", padding: "1px 4px", borderRadius: 4, display: "block", width: "fit-content" }}>停留 {ev.dur}</div>}
+                        {ev.trv && <div style={{ fontSize: "0.7rem", color: "#f59e0b", marginTop: 4, border: "1px dashed rgba(245,158,11,0.4)", background: "rgba(245,158,11,0.05)", padding: "1px 4px", borderRadius: 4, display: "block", width: "fit-content" }}>{ev.trv}</div>}
                     </div>
                     <div style={{ width: 28, height: 28, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.9rem", background: "rgba(255,255,255,0.05)", flexShrink: 0, marginTop: 1 }}>{ev.icon}</div>
-                    <div style={{ flex: 1, minWidth: 160 }}>
-                        <div style={{ fontSize: "0.85rem", color: "#fff", fontWeight: 600, marginBottom: 2 }}>{ev.title}</div>
-                        <div style={{ fontSize: "0.73rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.58 }}>{ev.desc}</div>
-                        {ev.tag && <span style={{ display: "inline-block", fontSize: "0.55rem", padding: "2px 6px", borderRadius: 8, marginTop: 4, fontWeight: 600, background: ts[ev.tt]?.b, color: ts[ev.tt]?.c }}>{ev.tag}</span>}
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: "0.95rem", color: "#fff", fontWeight: 600, marginBottom: 2 }}>{ev.title}</div>
+                        <div style={{ fontSize: "0.83rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.58 }}>{ev.desc}</div>
+                        {ev.tag && <span style={{ display: "inline-block", fontSize: "0.95rem", padding: "2px 6px", borderRadius: 8, marginTop: 4, fontWeight: 600, background: ts[ev.tt]?.b, color: ts[ev.tt]?.c }}>{ev.tag}</span>}
                         {expanded && ev.tips && (
                             <div style={{ marginTop: 8, background: "rgba(236,72,153,0.06)", border: "1px solid rgba(236,72,153,0.12)", borderRadius: 8, padding: "0.6rem" }}>
-                                <div style={{ color: "#ec4899", fontSize: "0.65rem", fontWeight: 600, marginBottom: 4 }}>💡 小提醒</div>
+                                <div style={{ color: "#ec4899", fontSize: "0.95rem", fontWeight: 600, marginBottom: 4 }}>💡 小提醒</div>
                                 {ev.tips.map((tip, i) => (
-                                    <div key={i} style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>→ {tip}</div>
+                                    <div key={i} style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>→ {tip}</div>
                                 ))}
                             </div>
                         )}
@@ -231,45 +244,35 @@
 
             return (
                 <div style={{ borderRadius: 14, overflow: 'hidden', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 8px 32px rgba(0,0,0,0.4)', background: '#1d2733' }}>
-                    <div style={{ display: 'flex', minHeight: 520, flexDirection: window.innerWidth < 700 ? 'column' : 'row' }}>
-                        <div style={{ flex: '1 1 55%', minHeight: 400, borderRight: '1px solid rgba(255,255,255,0.05)', position: 'relative' }}>
-                            <iframe src={currentEmbed} width="100%" height="100%" style={{ border: 0, display: "block", minHeight: window.innerWidth < 700 ? 350 : '100%' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                    <div style={{ display: 'flex', minHeight: 400, flexDirection: window.innerWidth < 700 ? 'column' : 'row' }}>
+                        <div style={{ flex: '1 1 60%', minHeight: 320, borderRight: '1px solid rgba(255,255,255,0.05)', position: 'relative' }}>
+                            <iframe src={currentEmbed} width="100%" height="100%" style={{ border: 0, display: "block", minHeight: window.innerWidth < 700 ? 280 : '100%' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             {activeStop !== null && (
-                                <button onClick={() => setActiveStop(null)} style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(32,33,36,0.95)', color: '#ec4899', border: '1px solid #5f6368', borderRadius: 20, padding: '8px 16px', fontWeight: 600, fontSize: '0.8rem', boxShadow: '0 2px 6px rgba(0,0,0,0.5)', cursor: 'pointer', zIndex: 1000, display: 'flex', alignItems: 'center', gap: 6 }}>
-                                    ← 顯示完整路線
+                                <button onClick={() => setActiveStop(null)} style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(32,33,36,0.95)', color: '#ec4899', border: '1px solid #5f6368', borderRadius: 20, padding: '8px 16px', fontWeight: 600, fontSize: '0.9rem', boxShadow: '0 2px 6px rgba(0,0,0,0.5)', cursor: 'pointer', zIndex: 1000 }}>
+                                    ← 完整路線
                                 </button>
                             )}
                         </div>
-                        <div style={{ flex: '1 1 45%', maxWidth: window.innerWidth < 700 ? '100%' : 360, background: '#202124', overflowY: 'auto', maxHeight: window.innerWidth < 700 ? 'none' : 520 }}>
-                            <div style={{ padding: '1.3rem 1.2rem 1rem' }}>
-                                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#e8eaed', margin: 0, lineHeight: 1.3 }}>{data.title}</h3>
-                                <p style={{ fontSize: '0.78rem', color: '#9aa0a6', lineHeight: 1.55, margin: '0.6rem 0 1rem' }}>{data.desc}</p>
-                                <div style={{ display: 'flex', gap: 8 }}>
-                                    <a href={data.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '8px 18px', borderRadius: 24, background: '#ec4899', color: '#fff', fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none', cursor: 'pointer' }}><span style={{ fontSize: '1rem', lineHeight: 1 }}>↗</span> Google Maps 導航</a>
-                                </div>
-                            </div>
-                            <div style={{ padding: '0 1.2rem', marginBottom: '0.5rem' }}>
-                                <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#e8eaed', padding: '0.8rem 0', borderTop: '1px solid #3c4043' }}>各站詳細資訊</div>
+                        <div style={{ flex: '1 1 40%', maxWidth: window.innerWidth < 700 ? '100%' : 300, background: '#202124', overflowY: 'auto', maxHeight: window.innerWidth < 700 ? 'none' : 400 }}>
+                            <div style={{ padding: '1rem 1rem 0.7rem' }}>
+                                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#e8eaed', margin: 0, lineHeight: 1.3 }}>{data.title}</h3>
+                                <p style={{ fontSize: '0.8rem', color: '#9aa0a6', lineHeight: 1.5, margin: '0.4rem 0 0.7rem' }}>{data.desc}</p>
+                                <a href={data.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 24, background: '#ec4899', color: '#fff', fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none' }}><span style={{ fontSize: '0.9rem', lineHeight: 1 }}>↗</span> 導航清單</a>
                             </div>
                             {data.markers.map((m, i) => (
-                                <div key={i} onClick={() => setActiveStop(i === activeStop ? null : i)} style={{ display: 'flex', gap: '0.8rem', padding: '0.8rem 1.2rem', textDecoration: 'none', cursor: 'pointer', transition: 'background 0.2s', borderBottom: '1px solid #3c4043', background: activeStop === i ? 'rgba(236,72,153,0.1)' : 'transparent' }} onMouseEnter={e => { if (activeStop !== i) e.currentTarget.style.background = '#303134'; }} onMouseLeave={e => { if (activeStop !== i) e.currentTarget.style.background = 'transparent'; }}>
-                                    <div style={{ width: 68, height: 68, borderRadius: 8, background: `linear-gradient(135deg,${color}44,${color}22)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', flexShrink: 0, border: activeStop === i ? `2px solid ${color}` : '1px solid rgba(255,255,255,0.08)' }}>{m.e}</div>
-                                    <div style={{ flex: 1, minWidth: 0, alignSelf: 'center' }}>
-                                        <div style={{ fontSize: '0.75rem', color: '#9aa0a6', fontWeight: 500, marginBottom: 2 }}>{m.t}</div>
-                                        <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#e8eaed', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{m.l}</div>
-                                        {m.addr && <div style={{ fontSize: '0.75rem', color: '#9aa0a6', marginTop: 8, display: 'flex', gap: 5 }}><span>📍</span><span>{m.addr}</span></div>}
-                                        {m.hrs && <div style={{ fontSize: '0.75rem', color: '#9aa0a6', marginTop: 4, display: 'flex', gap: 5 }}><span>🕐</span><span>{m.hrs}</span></div>}
-                                        {m.tk && <div style={{ fontSize: '0.75rem', color: '#ec4899', marginTop: 4, display: 'flex', gap: 5, fontWeight: 500 }}><span>🎫</span><span>{m.tk}</span></div>}
-                                        {m.trs && <div style={{ fontSize: '0.75rem', color: '#f59e0b', marginTop: 4, display: 'flex', gap: 5 }}><span>🚗</span><span>{m.trs}</span></div>}
-                                        {m.hl && m.hl.length > 0 && (<ul style={{ paddingLeft: '1.3rem', marginTop: 8, marginBottom: 0, fontSize: '0.78rem', color: '#e8eaed', lineHeight: 1.6 }}>{m.hl.map((h, idx) => <li key={idx} style={{ marginBottom: 2 }}>{h}</li>)}</ul>)}
-                                        {m.kt && (<div style={{ marginTop: 10, background: 'rgba(236,72,153,0.08)', borderRadius: 6, padding: '7px 11px', fontSize: '0.75rem', color: '#ec4899', border: '1px dashed rgba(236,72,153,0.25)', lineHeight: 1.45 }}>💡 <strong>注意：</strong>{m.kt}</div>)}
-                                        <div style={{ marginTop: 6 }}>
-                                            <a href={m.gm} target="_blank" onClick={(e) => e.stopPropagation()} rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: '#ec4899', textDecoration: 'none', fontWeight: 600, background: 'rgba(236,72,153,0.1)', padding: '4px 10px', borderRadius: 12 }}>↗ 獨立頁面開啟</a>
+                                <div key={i} onClick={() => setActiveStop(i === activeStop ? null : i)} style={{ display: 'flex', gap: '0.6rem', padding: '0.55rem 1rem', cursor: 'pointer', transition: 'background 0.2s', borderTop: '1px solid #3c4043', background: activeStop === i ? 'rgba(236,72,153,0.1)' : 'transparent', alignItems: 'center' }} onMouseEnter={e => { if (activeStop !== i) e.currentTarget.style.background = '#303134'; }} onMouseLeave={e => { if (activeStop !== i) e.currentTarget.style.background = 'transparent'; }}>
+                                    <div style={{ width: 36, height: 36, borderRadius: 8, background: `linear-gradient(135deg,${color}44,${color}22)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.15rem', flexShrink: 0, border: activeStop === i ? `2px solid ${color}` : '1px solid rgba(255,255,255,0.08)' }}>{m.e}</div>
+                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                                            <span style={{ fontSize: '0.72rem', color: '#ec4899', fontWeight: 600, flexShrink: 0 }}>{m.t}</span>
+                                            <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#e8eaed', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{m.l}</span>
                                         </div>
+                                        {m.addr && <div style={{ fontSize: '0.75rem', color: '#9aa0a6', marginTop: 2 }}>📍 {m.addr}</div>}
                                     </div>
+                                    <a href={m.gm} target="_blank" onClick={(e) => e.stopPropagation()} rel="noopener noreferrer" style={{ fontSize: '0.85rem', color: '#ec4899', textDecoration: 'none', flexShrink: 0, padding: '3px 6px', borderRadius: 8, background: 'rgba(236,72,153,0.08)' }}>↗</a>
                                 </div>
                             ))}
-                            <div style={{ padding: '1rem 1.2rem', fontSize: '0.65rem', color: '#9aa0a6', display: 'flex', justifyContent: 'space-between' }}>
+                            <div style={{ padding: '0.6rem 1rem', fontSize: '0.68rem', color: '#9aa0a6' }}>
                                 <span>地圖資料 ©2026 Google</span>
                             </div>
                         </div>
@@ -288,7 +291,7 @@
             const P = bg => ({ padding: "45px 12px", background: bg });
             const W = { maxWidth: 1000, margin: "0 auto" };
             const HD = { textAlign: "center", marginBottom: "1.7rem" };
-            const TG = (c = "#ec4899") => ({ fontSize: "0.66rem", fontWeight: 700, letterSpacing: 3, color: c, marginBottom: 4 });
+            const TG = (c = "#ec4899") => ({ fontSize: "0.95rem", fontWeight: 700, letterSpacing: 3, color: c, marginBottom: 4 });
             const TL = (c = "#fff") => ({ fontSize: "clamp(1.3rem,3.5vw,1.9rem)", fontWeight: 900, color: c, lineHeight: 1.3 });
 
             const tabs = [
@@ -296,8 +299,6 @@
                 { id: "maps", l: "🗺️ 地圖" },
                 { id: "food", l: "🍽️ 美食" },
                 { id: "nearby", l: "🌳 周邊" },
-                { id: "transport", l: "🚗 交通" },
-                { id: "tips", l: "💡 須知" },
                 { id: "checklist", l: "✅ 清單" }
             ];
 
@@ -307,7 +308,7 @@
                     <div style={{ background: "linear-gradient(160deg,#0a1628,#1a0a2e 25%,#3d1259 50%,#ec4899 85%,#f59e0b)", padding: "52px 12px 40px", textAlign: "center", position: "relative", overflow: "hidden" }}>
                         <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, background: "radial-gradient(circle at 30% 70%, rgba(236,72,153,0.15) 0%, transparent 60%), radial-gradient(circle at 70% 30%, rgba(245,158,11,0.1) 0%, transparent 50%)", pointerEvents: "none" }} />
                         <div style={{ position: "relative", zIndex: 1 }}>
-                            <div style={{ display: "inline-flex", gap: 5, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)", padding: "4px 16px", borderRadius: 50, color: "#ec4899", fontSize: "0.68rem", letterSpacing: 2, marginBottom: "0.8rem", backdropFilter: "blur(10px)" }}>👨‍👩‍👦 2大1小親子版·林口A7自駕出發</div>
+                            <div style={{ display: "inline-flex", gap: 5, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)", padding: "4px 16px", borderRadius: 50, color: "#ec4899", fontSize: "0.95rem", letterSpacing: 2, marginBottom: "0.8rem", backdropFilter: "blur(10px)" }}>👨‍👩‍👦 2大1小親子版·林口A7自駕出發</div>
                             <h1 style={{ fontSize: "clamp(1.5rem,4.5vw,2.6rem)", fontWeight: 900, lineHeight: 1.2, marginBottom: "0.4rem" }}>
                                 <span style={{ color: "#ec4899" }}>漢神洲際</span>×<span style={{ color: "#2dd4bf" }}>綠美圖</span><br />
                                 台中<span style={{ color: "#f59e0b" }}>親子一日遊</span>
@@ -319,7 +320,7 @@
                                 {[["👨‍👩‍👦", "2大1小"], ["🚗", "A7自駕"], ["🏬", "漢神洲際"], ["📚", "綠美圖"]].map(([n, l]) => (
                                     <div key={l} style={{ textAlign: "center" }}>
                                         <div style={{ fontSize: "1.3rem", fontWeight: 900, color: "#f59e0b" }}>{n}</div>
-                                        <div style={{ fontSize: "0.62rem", color: "rgba(255,255,255,0.4)" }}>{l}</div>
+                                        <div style={{ fontSize: "0.92rem", color: "rgba(255,255,255,0.4)" }}>{l}</div>
                                     </div>
                                 ))}
                             </div>
@@ -330,7 +331,7 @@
                     <div style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(10,22,40,0.95)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)", overflowX: "auto" }}>
                         <div style={{ display: "flex", maxWidth: 1000, margin: "0 auto", minWidth: "max-content" }}>
                             {tabs.map(t => (
-                                <button key={t.id} onClick={() => go(t.id)} style={{ padding: "10px 11px", background: "none", border: "none", borderBottom: nav === t.id ? "2px solid #ec4899" : "2px solid transparent", color: nav === t.id ? "#ec4899" : "rgba(255,255,255,0.36)", fontSize: "0.72rem", cursor: "pointer", whiteSpace: "nowrap", fontFamily: "inherit" }}>{t.l}</button>
+                                <button key={t.id} onClick={() => go(t.id)} style={{ padding: "10px 11px", background: "none", border: "none", borderBottom: nav === t.id ? "2px solid #ec4899" : "2px solid transparent", color: nav === t.id ? "#ec4899" : "rgba(255,255,255,0.36)", fontSize: "0.92rem", cursor: "pointer", whiteSpace: "nowrap", fontFamily: "inherit" }}>{t.l}</button>
                             ))}
                         </div>
                     </div>
@@ -341,40 +342,40 @@
                             <div style={HD}>
                                 <div style={TG()}>FAMILY DAY TRIP</div>
                                 <h2 style={TL()}>親子一日遊行程（2大1小）</h2>
-                                <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.3)", marginTop: 4 }}>07:30 A7出發 → 漢神洲際（米其林·LOPIA）→ 綠美圖 → 水湳中央公園 → 食藝石頭火鍋 → 返程</p>
+                                <p style={{ fontSize: "0.92rem", color: "rgba(255,255,255,0.3)", marginTop: 4 }}>07:30 集合出發 → 漢神洲際（米其林·LOPIA）→ 綠美圖 → 水湳中央公園 → 食藝石頭火鍋 → 返程</p>
                             </div>
 
                             {/* 路線摘要卡片 */}
                             <div style={{ background: "linear-gradient(135deg, rgba(236,72,153,0.08), rgba(139,92,246,0.05))", border: "1px solid rgba(236,72,153,0.2)", borderRadius: 14, padding: "1.2rem", marginBottom: "2rem", animation: "pulse-glow 3s infinite" }}>
                                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                                    <span style={{ fontSize: "0.55rem", padding: "2px 8px", borderRadius: 12, background: "#ec4899", color: "#fff", fontWeight: 700, letterSpacing: 1 }}>🚗 自駕路線</span>
-                                    <span style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.4)" }}>2大1小親子一日遊</span>
+                                    <span style={{ fontSize: "0.95rem", padding: "2px 8px", borderRadius: 12, background: "#ec4899", color: "#fff", fontWeight: 700, letterSpacing: 1 }}>🚗 自駕路線</span>
+                                    <span style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.4)" }}>2大1小親子一日遊</span>
                                 </div>
-                                <h3 style={{ fontSize: "0.95rem", fontWeight: 800, color: "#fff", marginBottom: 6 }}>林口A7 → 漢神洲際（6大米其林·LOPIA）→ 綠美圖 → 水湳中央公園 → 食藝石頭火鍋</h3>
-                                <p style={{ fontSize: "0.73rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>
-                                    從林口A7自駕約170公里。上午逛6大米其林品牌進駐的漢神洲際，B1必逛LOPIA日系超市、午餐吃米其林必比登拉麵「そらのいろ」。下午造訪妹島和世設計的綠美圖，接著到旁邊的水湳中央公園讓小朋友放電，傍晚直奔��權路「食藝石頭火鍋」吃台中限定的麻油爆炒石頭鍋！
+                                <h3 style={{ fontSize: "0.95rem", fontWeight: 800, color: "#fff", marginBottom: 6 }}>桃園市龜山區文青路（A7重劃區） → 漢神洲際（6大米其林·LOPIA）→ 綠美圖 → 水湳中央公園 → 食藝石頭火鍋</h3>
+                                <p style={{ fontSize: "0.83rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>
+                                    車程約170公里。上午逛6大米其林品牌進駐的漢神洲際，B1必逛LOPIA日系超市、午餐吃米其林必比登拉麵「そらのいろ」。下午造訪妹島和世設計的綠美圖，接著到旁邊的水湳中央公園讓小朋友放電，傍晚直奔��權路「食藝石頭火鍋」吃台中限定的麻油爆炒石頭鍋！
                                 </p>
                             </div>
 
                             {/* 時間軸 */}
-                            <div style={{ position: "relative", paddingLeft: 2 }}>
-                                <div style={{ position: "absolute", left: 12, top: 0, bottom: 0, width: 2.5, background: "linear-gradient(to bottom,#ec4899,#8b5cf6,#2dd4bf,#f59e0b)", borderRadius: 3 }} />
-                                <div style={{ position: "relative", marginBottom: "1.4rem", paddingLeft: 48 }}>
-                                    <div style={{ position: "absolute", left: 1, top: 0, width: 24, height: 24, borderRadius: "50%", background: "#ec4899", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: "0.65rem", color: "#fff", boxShadow: "0 0 12px rgba(236,72,153,0.4)", zIndex: 2 }}>1</div>
+                            <div style={{ position: "relative" }}>
+                                
+                                <div style={{ position: "relative", marginBottom: "1.4rem", paddingLeft: 0 }}>
+                                    
                                     <div style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, overflow: "hidden", padding: "0 1rem 1rem" }}>
                                         <div style={{ padding: "0.85rem 0", display: "flex", alignItems: "center", gap: "0.6rem", flexWrap: "wrap" }}>
-                                            <span style={{ fontSize: "0.56rem", fontWeight: 900, letterSpacing: 2, padding: "2px 8px", borderRadius: 14, background: "#ec4899", color: "#fff" }}>ONE DAY</span>
+                                            <span style={{ fontSize: "0.95rem", fontWeight: 900, letterSpacing: 2, padding: "2px 8px", borderRadius: 14, background: "#ec4899", color: "#fff" }}>ONE DAY</span>
                                             <div>
                                                 <div style={{ fontSize: "0.92rem", fontWeight: 700, color: "#fff" }}>台中親子一日遊（2大1小）</div>
-                                                <div style={{ fontSize: "0.66rem", color: "rgba(255,255,255,0.36)", marginTop: 1 }}>07:30 A7出發 → 漢神洲際·米其林午餐 → 綠美圖 → 水湳中央公園放電 → 食藝石頭火鍋 → 20:15返抵</div>
+                                                <div style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.36)", marginTop: 1 }}>07:30 集合出發 → 漢神洲際·米其林午餐 → 綠美圖 → 水湳中央公園放電 → 食藝石頭火鍋 → 20:15返抵</div>
                                             </div>
                                         </div>
                                         {TIMELINE.map((ev, i) => (
                                             <TimelineCard key={i} ev={ev} index={i} color="#ec4899" />
                                         ))}
                                         <div style={{ background: "rgba(236,72,153,0.06)", border: "1px solid rgba(236,72,153,0.12)", borderRadius: 8, padding: "0.7rem", marginTop: "0.5rem" }}>
-                                            <div style={{ color: "#ec4899", fontSize: "0.73rem", fontWeight: 600, marginBottom: 2 }}>💡 親子小提醒</div>
-                                            <div style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.7rem", lineHeight: 1.6 }}>帶小朋友出門記得多帶水和零食！車上準備玩具或平板讓小孩打發2小時車程。漢神洲際有哺乳室和兒童遊戲區，綠美圖有超棒的兒童繪本區。行程安排已考慮小孩體力，動線順暢不折返！</div>
+                                            <div style={{ color: "#ec4899", fontSize: "0.83rem", fontWeight: 600, marginBottom: 2 }}>💡 親子小提醒</div>
+                                            <div style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.9rem", lineHeight: 1.6 }}>帶小朋友出門記得多帶水和零食！車上準備玩具或平板讓小孩打發2小時車程。漢神洲際有哺乳室和兒童遊戲區，綠美圖有超棒的兒童繪本區。行程安排已考慮小孩體力，動線順暢不折返！</div>
                                         </div>
                                     </div>
                                 </div>
@@ -388,7 +389,7 @@
                             <div style={HD}>
                                 <div style={TG()}>DRIVING ROUTE MAP</div>
                                 <h2 style={TL()}>🗺️ 自駕路線地圖</h2>
-                                <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.3)", marginTop: 4 }}>林口A7 → 漢神洲際 → 綠美圖 → 水湳中央公園 → 食藝石頭火鍋。點擊各站查看詳情</p>
+                                <p style={{ fontSize: "0.92rem", color: "rgba(255,255,255,0.3)", marginTop: 4 }}>桃園市龜山區文青路（A7重劃區） → 漢神洲際 → 綠美圖 → 水湳中央公園 → 食藝石頭火鍋。點擊各站查看詳情</p>
                             </div>
                             <MapPanel data={MAP_DATA} color="#ec4899" />
                         </div>
@@ -400,7 +401,7 @@
                             <div style={HD}>
                                 <div style={TG()}>MUST-EAT GUIDE</div>
                                 <h2 style={TL()}>百貨必吃＋晚餐火鍋</h2>
-                                <p style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.28)", marginTop: 3 }}>漢神洲際6大米其林品牌＋全台首家餐廳＋LOPIA超市＋台中限定食藝石頭火鍋！</p>
+                                <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.28)", marginTop: 3 }}>漢神洲際6大米其林品牌＋全台首家餐廳＋LOPIA超市＋台中限定食藝石頭火鍋！</p>
                             </div>
                             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: "0.9rem" }}>
                                 {FOODS.map((f, i) => (
@@ -408,15 +409,15 @@
                                         <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
                                             <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(236,72,153,0.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.6rem", flexShrink: 0 }}>{f.e}</div>
                                             <div>
-                                                <h4 style={{ fontSize: "0.85rem", fontWeight: 800, color: "#fff", marginBottom: 2 }}>{f.n}</h4>
-                                                <div style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.4)" }}>{f.j}</div>
+                                                <h4 style={{ fontSize: "0.95rem", fontWeight: 800, color: "#fff", marginBottom: 2 }}>{f.n}</h4>
+                                                <div style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.4)" }}>{f.j}</div>
                                             </div>
                                         </div>
                                         <div style={{ display: "flex", gap: 5, marginTop: 2, flexWrap: "wrap" }}>
-                                            <span style={{ fontSize: "0.55rem", padding: "2px 7px", borderRadius: 8, background: f.w === "百貨內" ? "rgba(236,72,153,0.12)" : "rgba(139,92,246,0.12)", color: f.w === "百貨內" ? "#ec4899" : "#8b5cf6", fontWeight: 700 }}>📍 {f.w}</span>
-                                            <span style={{ fontSize: "0.55rem", padding: "2px 7px", borderRadius: 8, background: "rgba(245,158,11,0.1)", color: "#f59e0b", fontWeight: 700 }}>{f.k}</span>
+                                            <span style={{ fontSize: "0.95rem", padding: "2px 7px", borderRadius: 8, background: f.w === "百貨內" ? "rgba(236,72,153,0.12)" : "rgba(139,92,246,0.12)", color: f.w === "百貨內" ? "#ec4899" : "#8b5cf6", fontWeight: 700 }}>📍 {f.w}</span>
+                                            <span style={{ fontSize: "0.95rem", padding: "2px 7px", borderRadius: 8, background: "rgba(245,158,11,0.1)", color: "#f59e0b", fontWeight: 700 }}>{f.k}</span>
                                         </div>
-                                        <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.55, marginTop: 4 }}>{f.d}</p>
+                                        <p style={{ fontSize: "0.92rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.55, marginTop: 4 }}>{f.d}</p>
                                     </div>
                                 ))}
                             </div>
@@ -429,7 +430,7 @@
                             <div style={HD}>
                                 <div style={TG()}>NEARBY ATTRACTIONS</div>
                                 <h2 style={TL()}>周邊景點推薦</h2>
-                                <p style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.28)", marginTop: 3 }}>如果時間充裕，還可以順道造訪這些台中景點！</p>
+                                <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.28)", marginTop: 3 }}>如果時間充裕，還可以順道造訪這些台中景點！</p>
                             </div>
                             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "1rem" }}>
                                 {NEARBY.map((spot, i) => (
@@ -438,11 +439,11 @@
                                             <div style={{ width: 50, height: 50, borderRadius: 12, background: "linear-gradient(135deg, rgba(236,72,153,0.15), rgba(139,92,246,0.1))", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.8rem", flexShrink: 0 }}>{spot.e}</div>
                                             <div>
                                                 <h3 style={{ fontSize: "0.95rem", fontWeight: 800, color: "#fff", marginBottom: 3 }}>{spot.n}</h3>
-                                                <div style={{ fontSize: "0.68rem", color: "#ec4899", fontWeight: 600 }}>🚗 {spot.dist}</div>
+                                                <div style={{ fontSize: "0.95rem", color: "#ec4899", fontWeight: 600 }}>🚗 {spot.dist}</div>
                                             </div>
                                         </div>
-                                        <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.55 }}>{spot.d}</p>
-                                        {spot.url && <a href={spot.url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: "0.72rem", color: "#ec4899", textDecoration: "none", fontWeight: 600, background: "rgba(236,72,153,0.1)", padding: "5px 12px", borderRadius: 12, marginTop: 2 }}>↗ 查看詳細介紹</a>}
+                                        <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.55 }}>{spot.d}</p>
+                                        {spot.url && <a href={spot.url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: "0.92rem", color: "#ec4899", textDecoration: "none", fontWeight: 600, background: "rgba(236,72,153,0.1)", padding: "5px 12px", borderRadius: 12, marginTop: 2 }}>↗ 查看詳細介紹</a>}
                                     </div>
                                 ))}
                             </div>
@@ -451,65 +452,9 @@
                             <div style={{ marginTop: "1.5rem", background: "linear-gradient(135deg, rgba(45,212,191,0.08), rgba(236,72,153,0.05))", border: "1px dashed rgba(45,212,191,0.3)", borderRadius: 12, padding: "1.2rem", display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}>
                                 <div style={{ fontSize: "2.5rem", flexShrink: 0, animation: "float 3s ease-in-out infinite" }}>📚</div>
                                 <div style={{ flex: 1, minWidth: 200 }}>
-                                    <h3 style={{ fontSize: "0.88rem", fontWeight: 800, color: "#2dd4bf", marginBottom: 6 }}>🌟 亮點推薦：台中綠美圖（SANAA 妹島和世設計）</h3>
-                                    <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.55 }}>普立茲克建築獎得主妹島和世操刀設計，將圖書館與美術館合而為一的嶄新文化地標。白色通透的建築外觀宛如漂浮在綠地上的森林，位於水湳經貿園區。兒童繪本區非常豐富，帶小朋友來這裡看書、看展、看建築，一舉三得！</p>
+                                    <h3 style={{ fontSize: "0.95rem", fontWeight: 800, color: "#2dd4bf", marginBottom: 6 }}>🌟 亮點推薦：台中綠美圖（SANAA 妹島和世設計）</h3>
+                                    <p style={{ fontSize: "0.92rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.55 }}>普立茲克建築獎得主妹島和世操刀設計，將圖書館與美術館合而為一的嶄新文化地標。白色通透的建築外觀宛如漂浮在綠地上的森林，位於水湳經貿園區。兒童繪本區非常豐富，帶小朋友來這裡看書、看展、看建築，一舉三得！</p>
                                 </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* ═══ 交通 ═══ */}
-                    <section ref={el => rf.current.transport = el} style={P("#0a1628")}>
-                        <div style={W}>
-                            <div style={HD}>
-                                <div style={TG()}>DRIVING INFO</div>
-                                <h2 style={TL()}>自駕交通攻略</h2>
-                                <p style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.28)", marginTop: 3 }}>從林口A7出發，全程自駕最方便！帶小孩不用趕車超輕鬆。</p>
-                            </div>
-                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: "0.8rem" }}>
-                                {TRANSPORT.map((t, idx) => (
-                                    <div key={idx} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 11, padding: "1rem", transition: "border-color 0.2s" }} onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(236,72,153,0.3)'} onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'}>
-                                        <div style={{ fontSize: "1.5rem", marginBottom: 6 }}>{t.i}</div>
-                                        <h3 style={{ fontSize: "0.85rem", fontWeight: 700, marginBottom: 6, color: "#ec4899" }}>{t.t}</h3>
-                                        <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.42)", lineHeight: 1.6 }}>
-                                            {t.its.map((it, j) => <div key={j}>→ {it}</div>)}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            {/* 路線圖卡片 */}
-                            <div style={{ marginTop: "1.5rem", background: "linear-gradient(135deg, rgba(236,72,153,0.1), rgba(139,92,246,0.06))", border: "1px solid rgba(236,72,153,0.25)", borderRadius: 14, padding: "1.3rem", display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}>
-                                <div style={{ fontSize: "2.5rem", flexShrink: 0 }}>🗺️</div>
-                                <div style={{ flex: 1, minWidth: 200 }}>
-                                    <h3 style={{ fontSize: "0.95rem", fontWeight: 800, color: "#ec4899", marginBottom: 6 }}>🚗 自駕路線總覽</h3>
-                                    <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.6 }}>
-                                        <strong style={{ color: "#f59e0b" }}>去程：</strong>林口A7 → 國道1號南下 → 台74線 → 漢神洲際（北屯）→ 綠美圖（水湳）→ 水湳中央公園（水湳）→ 食藝石頭火鍋（民權路）<br /><br />
-                                        <strong style={{ color: "#2dd4bf" }}>回程：</strong>食藝石頭火鍋 → 台74線 → 國道1號北上 → 林口A7<br /><br />
-                                        <strong style={{ color: "#fff" }}>全日里程：</strong>約350公里來回 ｜ <strong style={{ color: "#fff" }}>預估油資：</strong>約NT$600~800 ｜ <strong style={{ color: "#fff" }}>過路費：</strong>約NT$200
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* ═══ 須知 ═══ */}
-                    <section ref={el => rf.current.tips = el} style={P("#0d2847")}>
-                        <div style={W}>
-                            <div style={HD}>
-                                <div style={TG()}>FAMILY TIPS</div>
-                                <h2 style={TL()}>親子實用須知</h2>
-                            </div>
-                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: "0.8rem" }}>
-                                {TIPS.map((t, idx) => (
-                                    <div key={idx} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 11, padding: "1rem" }}>
-                                        <div style={{ fontSize: "1.1rem", marginBottom: 3 }}>{t.i}</div>
-                                        <h3 style={{ fontSize: "0.82rem", fontWeight: 700, marginBottom: 4, color: "#ec4899" }}>{t.t}</h3>
-                                        <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.42)", lineHeight: 1.6 }}>
-                                            {t.its.map((it, j) => <div key={j}>→ {it}</div>)}
-                                        </div>
-                                    </div>
-                                ))}
                             </div>
                         </div>
                     </section>
@@ -524,16 +469,16 @@
                             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: "1rem" }}>
                                 {Object.entries(CHECKLIST).map(([g, items]) => (
                                     <div key={g}>
-                                        <h3 style={{ fontSize: "0.88rem", fontWeight: 700, color: "#0a1628", marginBottom: 6 }}>{g}</h3>
+                                        <h3 style={{ fontSize: "0.95rem", fontWeight: 700, color: "#0a1628", marginBottom: 6 }}>{g}</h3>
                                         {items.map((it, i) => {
                                             const k = `${g}-${i}`;
                                             const d = !!ck[k];
                                             return (
                                                 <div key={k} onClick={() => setCk(p => ({ ...p, [k]: !p[k] }))} style={{ display: "flex", alignItems: "flex-start", gap: 6, padding: "4px 0", cursor: "pointer" }}>
                                                     <div style={{ width: 16, height: 16, borderRadius: 4, border: d ? "none" : "2px solid #e2a5b8", background: d ? "#ec4899" : "transparent", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", marginTop: 1 }}>
-                                                        {d && <span style={{ color: "#fff", fontSize: "0.55rem", fontWeight: 900 }}>✓</span>}
+                                                        {d && <span style={{ color: "#fff", fontSize: "0.95rem", fontWeight: 900 }}>✓</span>}
                                                     </div>
-                                                    <span style={{ fontSize: "0.76rem", color: d ? "#b0a3a8" : "#1e293b", textDecoration: d ? "line-through" : "none" }}>{it}</span>
+                                                    <span style={{ fontSize: "0.86rem", color: d ? "#b0a3a8" : "#1e293b", textDecoration: d ? "line-through" : "none" }}>{it}</span>
                                                 </div>
                                             );
                                         })}
@@ -545,7 +490,7 @@
 
                     {/* ─── FOOTER ─── */}
                     <div style={{ background: "#0a1628", borderTop: "1px solid rgba(255,255,255,0.05)", padding: "1.5rem 12px", textAlign: "center" }}>
-                        <p style={{ color: "rgba(255,255,255,0.17)", fontSize: "0.65rem", lineHeight: 1.8 }}>
+                        <p style={{ color: "rgba(255,255,255,0.17)", fontSize: "0.95rem", lineHeight: 1.8 }}>
                             🏬 台中親子一日遊完整攻略（2大1小）<br />
                             👨‍👩‍👦 林口A7自駕·漢神洲際＋綠美圖＋水湳中央公園＋食藝石頭火鍋<br />
                             以 <span style={{ color: "#ec4899" }}>♥</span> 製作
