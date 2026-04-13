@@ -13,22 +13,20 @@
 ### 必要 CDN（寫在 `<head>` 中，順序固定）
 
 ```html
-<!-- 1. Leaflet 地圖 CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<!-- 2. Leaflet 地圖 JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<!-- 3. React -->
+<!-- 1. React -->
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-<!-- 4. ReactDOM -->
+<!-- 2. ReactDOM -->
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-<!-- 5. Babel -->
+<!-- 3. Babel -->
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
 ```
+
+> **注意：不需要 Leaflet 等額外地圖 CDN。地圖使用 Google Maps iframe embed。**
 
 ### React Hooks
 
 ```javascript
-const { useState, useRef, useEffect } = React;
+const { useState, useRef } = React;
 ```
 
 ---
@@ -42,7 +40,7 @@ const { useState, useRef, useEffect } = React;
 | 1 | Hero Banner | — | 漸層背景＋標題＋人數/交通/亮點快覽 |
 | 2 | Sticky Nav | — | 固定在頂部的分頁按鈕列 |
 | 3 | 行程時間軸 | `itinerary` | 路線摘要卡片 + TimelineCard 元件列表 |
-| 4 | 路線地圖 | `maps` | **Leaflet + OpenStreetMap** 互動地圖面板 + 交通資訊 |
+| 4 | 路線地圖 | `maps` | **Google Maps iframe embed** 互動地圖面板 + 交通資訊 |
 | 5 | 美食推薦 | `food` | 至少 6~8 項在地美食卡片 |
 | 6 | 周邊景點 | `nearby` | 至少 6~8 項可加碼景點 |
 | 7 | 實用須知 | — | 至少 5~6 類分類提示 |
@@ -108,70 +106,89 @@ const ts = {
 
 ## 五、地圖規範（⚠️ 絕對不可違反）
 
-### ✅ 唯一允許的地圖方案：Leaflet + OpenStreetMap
+### ✅ 唯一允許的地圖方案：Google Maps iframe embed
 
 ```
-❌ 禁止使用 Google Maps iframe embed（output=embed 已廢棄，返回 404）
-❌ 禁止使用 maps.google.com/maps?...&output=embed
-✅ 必須使用 Leaflet.js + OpenStreetMap tiles
+✅ 使用 Google Maps iframe embed（`output=embed`）— 所有現有頁面都用此方案且正常運作
+✅ 路線概覽：maps.google.com/maps?saddr=起點&daddr=站1+to:站2+to:站3&dirflg=d&hl=zh-TW&output=embed
+✅ 單點查看：maps.google.com/maps?q=景點名稱&hl=zh-TW&output=embed
+❌ 不要使用 Leaflet 或其他第三方地圖庫（增加不必要的 CDN 依賴）
 ```
 
-### MapPanel 元件模板
+> **重要提示：** Google Maps embed URL 在瀏覽器 iframe 中正常運作。不要用 curl 測試（會返回假的 404），要在瀏覽器中驗證。
+
+### 路線 embed URL 組合規則
+
+```
+https://maps.google.com/maps?saddr={起點名稱}&daddr={站1}+to:{站2}+to:{站3}&dirflg=d&hl=zh-TW&output=embed
+```
+
+- `saddr` = 起點（中文地名即可）
+- `daddr` = 目的地，多站用 `+to:` 串聯
+- `dirflg=d` = 開車路線
+- `hl=zh-TW` = 繁體中文介面
+- `output=embed` = iframe 嵌入模式
+
+### 單點 embed URL
+
+```
+https://maps.google.com/maps?q={景點名稱}&hl=zh-TW&output=embed
+```
+
+### MapPanel 元件模板（Google Maps iframe 版）
 
 ```jsx
 function MapPanel({ data, color }) {
     const [activeStop, setActiveStop] = useState(null);
-    const mapRef = useRef(null);
-    const mapInstance = useRef(null);
-    const markersRef = useRef([]);
+    const currentEmbed = activeStop !== null
+        ? `https://maps.google.com/maps?q=${data.markers[activeStop].gm.split('?q=')[1]}&hl=zh-TW&output=embed`
+        : data.embed;
 
-    useEffect(() => {
-        if (!mapRef.current || mapInstance.current) return;
-        const bounds = data.markers.map(m => [m.lat, m.lng]);
-        const map = L.map(mapRef.current, {
-            scrollWheelZoom: false,
-            attributionControl: true,
-            zoomControl: true
-        });
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap',
-            maxZoom: 18
-        }).addTo(map);
-
-        const routeCoords = [];
-        data.markers.forEach((m, i) => {
-            routeCoords.push([m.lat, m.lng]);
-            const icon = L.divIcon({
-                className: '',
-                html: `<div style="background:${color};color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.4)">${m.e}</div>`,
-                iconSize: [30, 30],
-                iconAnchor: [15, 15]
-            });
-            const marker = L.marker([m.lat, m.lng], { icon }).addTo(map);
-            marker.bindPopup(`<div style="font-size:13px"><b>${m.t} ${m.l}</b><br/><span style="color:#666">${m.addr || ''}</span><br/><a href="${m.gm}" target="_blank" style="color:${color}">↗ Google Maps</a></div>`);
-            markersRef.current.push(marker);
-        });
-
-        L.polyline(routeCoords, { color, weight: 3, opacity: 0.7, dashArray: '8,8' }).addTo(map);
-        map.fitBounds(bounds, { padding: [30, 30] });
-        mapInstance.current = map;
-        return () => { map.remove(); mapInstance.current = null; markersRef.current = []; };
-    }, []);
-
-    useEffect(() => {
-        if (!mapInstance.current) return;
-        if (activeStop !== null) {
-            const m = data.markers[activeStop];
-            mapInstance.current.setView([m.lat, m.lng], 15, { animate: true });
-            markersRef.current[activeStop]?.openPopup();
-        } else {
-            const bounds = data.markers.map(m => [m.lat, m.lng]);
-            mapInstance.current.fitBounds(bounds, { padding: [30, 30], animate: true });
-            markersRef.current.forEach(mk => mk.closePopup());
-        }
-    }, [activeStop]);
-
-    // ... 右側側邊欄 UI 同樣式模板（見下方完整範例）
+    return (
+        <div style={{ borderRadius: 14, overflow: 'hidden', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 8px 32px rgba(0,0,0,0.4)', background: '#1d2733' }}>
+            <div style={{ display: 'flex', minHeight: 400, flexDirection: window.innerWidth < 700 ? 'column' : 'row' }}>
+                {/* 左側：Google Maps iframe */}
+                <div style={{ flex: '1 1 60%', minHeight: 320, borderRight: '1px solid rgba(255,255,255,0.05)', position: 'relative' }}>
+                    <iframe src={currentEmbed} width="100%" height="100%" style={{ border: 0, display: "block", minHeight: window.innerWidth < 700 ? 280 : '100%' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                    {activeStop !== null && (
+                        <button onClick={() => setActiveStop(null)} style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(32,33,36,0.95)', color: color, border: '1px solid #5f6368', borderRadius: 20, padding: '8px 16px', fontWeight: 600, fontSize: '0.9rem', boxShadow: '0 2px 6px rgba(0,0,0,0.5)', cursor: 'pointer', zIndex: 1000 }}>
+                            ← 完整路線
+                        </button>
+                    )}
+                </div>
+                {/* 右側：站點側邊欄 */}
+                <div style={{ flex: '1 1 40%', maxWidth: window.innerWidth < 700 ? '100%' : 300, background: '#202124', overflowY: 'auto', maxHeight: window.innerWidth < 700 ? 'none' : 400 }}>
+                    <div style={{ padding: '1rem 1rem 0.7rem' }}>
+                        <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#e8eaed', margin: 0, lineHeight: 1.3 }}>{data.title}</h3>
+                        <p style={{ fontSize: '0.8rem', color: '#9aa0a6', lineHeight: 1.5, margin: '0.4rem 0 0.7rem' }}>{data.desc}</p>
+                        <a href={data.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 24, background: color, color: '#fff', fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none' }}>
+                            <span style={{ fontSize: '0.9rem', lineHeight: 1 }}>↗</span> 導航清單
+                        </a>
+                    </div>
+                    {data.markers.map((m, i) => (
+                        <div key={i} onClick={() => setActiveStop(i === activeStop ? null : i)}
+                            style={{ display: 'flex', gap: '0.6rem', padding: '0.55rem 1rem', cursor: 'pointer', transition: 'background 0.2s', borderTop: '1px solid #3c4043', background: activeStop === i ? `${color}1a` : 'transparent', alignItems: 'center' }}
+                            onMouseEnter={e => { if (activeStop !== i) e.currentTarget.style.background = '#303134'; }}
+                            onMouseLeave={e => { if (activeStop !== i) e.currentTarget.style.background = 'transparent'; }}>
+                            <div style={{ width: 36, height: 36, borderRadius: 8, background: `linear-gradient(135deg,${color}44,${color}22)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.15rem', flexShrink: 0, border: activeStop === i ? `2px solid ${color}` : '1px solid rgba(255,255,255,0.08)' }}>{m.e}</div>
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                                    <span style={{ fontSize: '0.72rem', color: color, fontWeight: 600, flexShrink: 0 }}>{m.t}</span>
+                                    <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#e8eaed', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{m.l}</span>
+                                </div>
+                                {m.addr && <div style={{ fontSize: '0.75rem', color: '#9aa0a6', marginTop: 2 }}>📍 {m.addr}</div>}
+                            </div>
+                            <a href={m.gm} target="_blank" onClick={(e) => e.stopPropagation()} rel="noopener noreferrer"
+                                style={{ fontSize: '0.85rem', color: color, textDecoration: 'none', flexShrink: 0, padding: '3px 6px', borderRadius: 8, background: `${color}14` }}>↗</a>
+                        </div>
+                    ))}
+                    <div style={{ padding: '0.6rem 1rem', fontSize: '0.68rem', color: '#9aa0a6' }}>
+                        <span>地圖資料 ©2026 Google</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 ```
 
@@ -181,15 +198,13 @@ function MapPanel({ data, color }) {
 const MAP_DATA = {
     title: "路線標題",
     desc: "路線描述",
-    // ❌ 不要有 embed 欄位
+    embed: "https://maps.google.com/maps?saddr=起點&daddr=站1+to:站2+to:站3&dirflg=d&hl=zh-TW&output=embed",
     markers: [
         {
-            gm: "https://maps.google.com/?q=景點名稱",  // Google Maps 連結（用於外開導航）
+            gm: "https://maps.google.com/?q=景點名稱",  // Google Maps 連結（用於外開導航 + embed 單點切換）
             l: "站名",
             e: "🎯",        // emoji 圖示
             t: "09:00",     // 時間
-            lat: 24.6801,   // ⚠️ 必填！緯度
-            lng: 121.6165,  // ⚠️ 必填！經度
             addr: "完整地址",
             hrs: "營業時間",
             tk: "門票/費用",
@@ -199,11 +214,24 @@ const MAP_DATA = {
         },
         // ...更多站點
     ],
-    url: "https://maps.google.com/maps/dir/起點/站1/站2/..."  // Google Maps 完整路線連結
+    url: "https://maps.google.com/maps/dir/起點/站1/站2/..."  // Google Maps 完整路線連結（外開導航用）
 };
 ```
 
-**每個 marker 必須包含 `lat` 和 `lng`！** 這是 Leaflet 地圖定位的必要資料。
+> **不需要 `lat`/`lng` 欄位！** Google Maps iframe 用地名自動定位，marker 的 `gm` 欄位提供 `?q=景點名` 即可切換單點顯示。
+
+### 多日行程的地圖
+
+多日行程（如苗栗二日遊）每天一個 MAP_DAY 物件：
+
+```javascript
+const MAP_DAY1 = { title: "Day 1：...", desc: "...", embed: "...", markers: [...], url: "..." };
+const MAP_DAY2 = { title: "Day 2：...", desc: "...", embed: "...", markers: [...], url: "..." };
+
+// 在地圖區段用 Tab 切換
+<MapPanel data={MAP_DAY1} color={COLORS.primary} />
+<MapPanel data={MAP_DAY2} color={COLORS.accent} />
+```
 
 ---
 
@@ -295,10 +323,11 @@ const CHECKLIST = {
 - 展開區用 `💡 小提醒` 標題
 
 ### MapPanel
-- 左側：Leaflet 互動地圖（emoji marker、虛線路線）
+- 左側：Google Maps iframe embed（預設顯示完整路線，點擊站點切換到單點）
 - 右側：站點側邊欄（可點擊切換地圖焦點）
+- 「← 完整路線」按鈕返回路線概覽
 - 底部：「↗ 導航清單」按鈕開啟 Google Maps 完整路線
-- attribution 文字：`© OpenStreetMap contributors`
+- attribution 文字：`地圖資料 ©2026 Google`
 
 ### 打包清單
 - 互動 checkbox，點擊可勾選/取消
@@ -339,14 +368,16 @@ const CHECKLIST = {
 - [ ] 不存在任何 `travel.xxx.tw` 或部落格的圖片 URL
 
 ### 地圖檢查
-- [ ] 使用 Leaflet + OpenStreetMap（不是 Google Maps iframe）
-- [ ] `<head>` 中包含 Leaflet CSS 和 JS
-- [ ] 所有 MAP_DATA markers 都有 `lat` 和 `lng`
-- [ ] 不存在任何 `output=embed` 字串
+- [ ] 使用 Google Maps iframe embed（`output=embed`）
+- [ ] MAP_DATA 包含 `embed` 欄位（完整路線 embed URL）
+- [ ] 所有 MAP_DATA markers 的 `gm` 欄位使用 `maps.google.com/?q=景點名` 格式
+- [ ] iframe 包含 `allowFullScreen`、`loading="lazy"`、`referrerPolicy="no-referrer-when-downgrade"`
+- [ ] `<head>` 中不包含 Leaflet 或其他地圖庫 CDN
 
 ### 連結檢查
-- [ ] Google Maps 連結使用 `maps.google.com/?q=` 格式（外開導航，不是 embed）
+- [ ] Google Maps 外開連結使用 `maps.google.com/?q=` 格式（外開導航）
 - [ ] 地圖路線連結使用 `maps.google.com/maps/dir/` 格式
+- [ ] 地圖 embed 使用 `maps.google.com/maps?saddr=...&output=embed` 格式
 - [ ] 參考部落格連結僅作延伸閱讀，頁面資訊本身完整
 
 ### 完整性檢查
