@@ -84,12 +84,35 @@ const ts = {
 
 ## 四、圖片來源規範（⚠️ 絕對不可違反）
 
-### ✅ 允許的圖片來源（只能用這些）
+### 🎯 核心原則：TIMELINE 主景點必須用真實景點照片
 
-| 來源 | 格式 | 說明 |
-|------|------|------|
-| **Unsplash** | `https://images.unsplash.com/photo-XXXXX?auto=format&fit=crop&w=640&q=80` | 最推薦、最穩定。用描述性關鍵字在 Unsplash 搜尋合適照片 |
-| **Wikipedia Commons** | `https://upload.wikimedia.org/wikipedia/commons/thumb/X/XX/檔名.jpg/960px-檔名.jpg` | 適合知名景點有條目的情況 |
+**每個 TIMELINE 站點的 `img` 欄位，必須優先使用該景點的真實照片**（Wikipedia Commons），**禁止預設就用 Unsplash 示意圖**。Unsplash 只在找不到真實照片時才作為最後手段。
+
+### ✅ 允許的圖片來源（優先順序）
+
+| 優先級 | 來源 | 格式 | 使用時機 |
+|--------|------|------|------|
+| 1️⃣ **優先** | **Wikipedia Commons** | `https://upload.wikimedia.org/wikipedia/commons/thumb/X/XX/檔名.jpg/960px-檔名.jpg` | **TIMELINE 主景點必須先找這個**。景點真實照、條目插圖 |
+| 2️⃣ 次選 | **Unsplash** | `https://images.unsplash.com/photo-XXXXX?auto=format&fit=crop&w=640&q=80` | Commons 找不到才用。適合出發/返程/交通等抽象場景，或美食卡片示意圖 |
+
+### 🔍 真實景點照片搜尋流程（TIMELINE 每個站點必做）
+
+1. **查維基百科條目**（中文優先）：
+   ```
+   https://zh.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&titles=景點名&pithumbsize=960&redirects=1
+   ```
+2. **查 Wikimedia Commons 檔案庫**（中英文關鍵字都試）：
+   ```
+   https://commons.wikimedia.org/w/api.php?action=query&format=json&list=search&srsearch=景點名&srnamespace=6&srlimit=10
+   ```
+3. **取得 thumb URL**：
+   ```
+   https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&iiurlwidth=960&titles=File:檔名
+   ```
+4. **回退策略**（找不到該景點本身的照片時，依序嘗試）：
+   - a. 景點所在區域的實景（例如景點在「平鎮區」就用「Pingzhen District Scenery」）
+   - b. 同一行程線上的地標代替
+   - c. 都找不到才用 Unsplash 示意圖，但要在該景點的 `tips` 欄位或 code comment 註明「⚠️ 示意圖（Commons 無真實照）」
 
 ### ❌ 絕對禁止的圖片來源
 
@@ -100,7 +123,7 @@ const ts = {
 
 ### 圖片驗證流程
 
-**每張圖片都必須用 `web_fetch` 工具驗證能返回 JPEG/PNG 二進位資料（`JFIF` 或 `PNG` 標頭），確認後才能使用。**
+**每張圖片都必須用 `curl -sL -o /dev/null -w "%{http_code}"` 驗證回 200**，確認後才能使用。
 
 ---
 
