@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的旅行計畫 ✈️</title>
+    <meta name="description" content="所有旅行行程總覽 - 一站式查看所有旅遊攻略">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: #0a1628;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 50%, #0a1628 100%);
+        }
+
+        .hero-emoji {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .trips-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 32px 20px 60px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .trip-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: linear-gradient(135deg, #1e293b, #1a2340);
+            border: 1px solid rgba(96, 165, 250, 0.15);
+            border-radius: 16px;
+            padding: 28px 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-from), var(--accent-to));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .trip-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(96, 165, 250, 0.35);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .trip-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .card-emoji {
+            font-size: 40px;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .card-info {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+        }
+
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(96, 165, 250, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.2);
+        }
+
+        .card-arrow {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #475569;
+            transition: all 0.3s ease;
+        }
+
+        .trip-card:hover .card-arrow {
+            color: #60a5fa;
+            transform: translateY(-50%) translateX(4px);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px 20px 40px;
+            color: #475569;
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 600px) {
+            .hero {
+                padding: 80px 20px 50px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .trips-grid {
+                padding: 40px 20px 80px;
+            }
+
+            .trip-card {
+                padding: 32px 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <div class="hero-emoji">✈️</div>
+        <h1>我的旅行計畫</h1>
+        <p>所有行程攻略，一站查閱</p>
+    </div>
+
+    <div class="trips-grid">
+        <a class="trip-card" href="cruise-okinawa.html"
+            style="--accent-from: #38bdf8; --accent-to: #818cf8;">
+            <div class="card-header">
+                <div class="card-emoji">🚢</div>
+                <div class="card-info">
+                    <div class="card-title">麗星郵輪 × 那霸·石垣島</div>
+                    <div class="card-subtitle">2大1小親子版 · 4天3夜完整攻略</div>
+                </div>
+            </div>
+            <div class="card-tags">
+                <span class="tag">🛳️ 郵輪</span>
+                <span class="tag">👨‍👩‍👦 親子</span>
+                <span class="tag">🇯🇵 沖繩</span>
+                <span class="tag">🚗 自駕</span>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+
+        <a class="trip-card" href="hanshin-day-trip.html"
+            style="--accent-from: #f472b6; --accent-to: #fb923c;">
+            <div class="card-header">
+                <div class="card-emoji">🏬</div>
+                <div class="card-info">
+                    <div class="card-title">台中親子一日遊（2大1小）</div>
+                    <div class="card-subtitle">林口A7自駕 · 漢神洲際＋綠美圖＋水湳中央公園＋食藝石頭火鍋</div>
+                </div>
+            </div>
+            <div class="card-tags">
+                <span class="tag">👨‍👩‍👦 2大1小</span>
+                <span class="tag">🚗 A7自駕</span>
+                <span class="tag">🏬 漢神洲際</span>
+                <span class="tag">📚 綠美圖</span>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+        <a class="trip-card" href="miaoli-2day-trip.html"
+            style="--accent-from: #16a34a; --accent-to: #7c3aed;">
+            <div class="card-header">
+                <div class="card-emoji">🌹</div>
+                <div class="card-info">
+                    <div class="card-title">苗栗親子兩天一夜（2大1小）</div>
+                    <div class="card-subtitle">林口A7自駕 · 龍騰斷橋＋日新島＋哈比丘＋功維敘隧道＋阿水海鮮＋慕雲想莊園</div>
+                </div>
+            </div>
+            <div class="card-tags">
+                <span class="tag">👨‍👩‍👦 2大1小</span>
+                <span class="tag">🌉 龍騰斷橋</span>
+                <span class="tag">🌹 慕雲想莊園</span>
+                <span class="tag">🏡 哈比丘</span>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+    </div>
+
+    <div class="footer">
+        <p>✨ 持續更新中 — 新的旅行即將展開</p>
+    </div>
+</body>
+
+</html>
