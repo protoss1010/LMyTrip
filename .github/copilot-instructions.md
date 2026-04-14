@@ -262,33 +262,52 @@ const MAP_DAY2 = { title: "Day 2：...", desc: "...", embed: "...", markers: [..
 
 ## 六、超連結規範
 
-### 🎯 核心原則：景點 url 欄位必須是「景點介紹網站」，禁止用 Google Maps
+### 🎯 核心原則：景點 url 欄位 = 高品質旅遊部落格文章
 
-TIMELINE 與 NEARBY 的 `url` 欄位是提供使用者「延伸閱讀、認識景點」的介紹網站，**禁止偷懶塞 `https://maps.google.com/?q=景點名`**（那是地圖導航，不是介紹）。Google Maps 連結只能用在 MAP_DATA.markers 的 `gm` 欄位與 MAP_DATA.url（那才是導航用途）。
+TIMELINE 與 NEARBY 的 `url` 欄位是提供使用者「延伸閱讀、認識景點」的介紹連結，**唯一首選是實地走訪的高品質旅遊部落格文章**。官方網站／政府觀光網頁一律**不使用**（制式介紹無參考價值）。真的找不到夠好的部落格文章時，才用 Google Maps 連結當備案。
 
-### ✅ `url` 欄位允許的連結類型（優先順序）
+### ✅ `url` 欄位允許的連結類型（僅以下兩種）
 
 | 優先級 | 類型 | 範例 |
 |--------|------|------|
-| 1️⃣ 最優先 | **官方網站 / 品牌官網** | `thsrc.com.tw`、`gloriaoutlets.com`、`ikea.com.tw`、`jlyes.com.tw`（夜市官方）、場館專屬官網 |
-| 2️⃣ 政府官方 | **`.gov.tw` 旅遊/文化網** | `travel.tycg.gov.tw/zh-tw/travel/attraction/<id>`（桃園觀光導覽網）、`taoyuan-parkgo.tw`（公園入口網） |
-| 3️⃣ 次選 | **知名旅遊部落格** | `bobowin.blog`、`yukiblog.tw`、`albertblog.tw`、`hsuanmom.tw`、`yoke918.tw`、`snoopyblog.com`、`tenjo.tw` 等 |
-| 4️⃣ 新聞媒體 | **主流媒體報導** | `udn.com`、`ltn.com.tw`、`mombaby.com.tw` 等正規媒體 |
+| 1️⃣ **首選** | **高品質旅遊部落格文章** | `bobowin.blog`、`yukiblog.tw`、`albertblog.tw`、`hsuanmom.tw`、`yoke918.tw`、`snoopyblog.com`、`tenjo.tw` 等 — **必須符合下方「高品質認定標準」** |
+| 2️⃣ 備案 | **Google Maps 單點連結** | `https://maps.google.com/?q=景點名` — 找不到夠好的部落格文章時才用 |
+
+### ❌ `url` 欄位禁止的連結類型
+
+- **官方網站 / 品牌官網**（如 `gloriaoutlets.com`、場館官網）— 制式介紹、常改版失聯
+- **`.gov.tw` 旅遊／觀光導覽頁**（如 `travel.tycg.gov.tw`）— 資訊乾、照片少
+- **新聞媒體報導**（如 `udn.com`、`ltn.com.tw`）— 時事性強、非景點介紹
+- 低品質部落格文章（見下方標準不達標者）
 
 ### 🔍 景點介紹網址搜尋流程（TIMELINE 與 NEARBY 每項必做）
 
-1. **用 `WebSearch` 搜尋 `<景點名> 介紹` 或 `<景點名> 官網`**，優先挑官方網站
-2. 沒官網時挑 `.gov.tw` 旅遊／觀光導覽頁
-3. 都沒有才挑知名部落格文章
-4. **必須用 `curl -sL -o /dev/null -w "%{http_code}" --max-time 10 "<url>"` 驗證回 200**
-5. 部分部落格（如 `albertblog.tw`、`saratrip.com`）對 curl UA 會回 403，瀏覽器卻能開 — **若 curl 擋了就改選其他來源**，不要賭
-6. **禁止捏造 URL**：bobowin.blog 有兩種 slug 格式（日期 `2017-02-06-29` 或主題 `pingzhen-sport-park`），都必須先 WebSearch 確認存在再使用
+1. **用 `WebSearch` 搜尋 `<景點名> 部落格`、`<景點名> 心得`、`<景點名> 親子`** 找旅遊部落格文章
+2. 候選連結逐一用 `WebFetch` 預檢查內容品質（見下方標準），挑符合標準的最佳一篇
+3. **必須用 `curl -sL -o /dev/null -w "%{http_code}" --max-time 10 "<url>"` 驗證回 200**
+4. 部分部落格（如 `albertblog.tw`、`saratrip.com`）對 curl UA 會回 403，瀏覽器卻能開 — **若 curl 擋了就改選其他來源**，不要賭
+5. **禁止捏造 URL**：bobowin.blog 有兩種 slug 格式（日期 `2017-02-06-29` 或主題 `pingzhen-sport-park`），都必須先 WebSearch 確認存在再使用
+6. 所有候選部落格都不達品質標準 → **退回 Google Maps 連結 `https://maps.google.com/?q=景點名`**，不勉強塞爛文章，也不改用官網／政府頁
 
-### Google Maps 連結（只能用在地圖導航欄位）
+### ⭐ 高品質部落格文章的認定標準（選部落格時必須檢查）
+
+光是 URL 回 200、網域是知名部落格還不夠 — 一篇爛文章連結過去反而傷使用體驗。選部落格前必須用 `WebFetch` 或瀏覽預覽確認該篇文章符合以下**全部**條件：
+
+| # | 品質標準 | 如何檢查 |
+|---|---------|---------|
+| 1 | **主題精準對應景點** | 文章標題/H1 必須直接寫到該景點名，不是「XX 一日遊路線」順便提一段 |
+| 2 | **實地走訪的圖文紀錄** | 要有作者自己拍的多張現場照片（通常 ≥ 10 張）、動線描述、心得評論 |
+| 3 | **資訊完整且近期** | 含地址、營業時間、票價、交通、停車等實用資訊；發文或更新日期盡量近 3 年內 |
+| 4 | **內容字數充足** | 正文至少數百字的深度介紹，不是 100 字打卡文或純圖庫 |
+| 5 | **排版可讀、非廣告農場** | 排除 `xuite.net` 等舊站、內容農場、KOL 的純業配單圖文 |
+
+**操作流程：** 遇到候選部落格連結，先用 `WebFetch` 抓回摘要（prompt: `這篇文章是否為 <景點名> 的實地走訪介紹？包含哪些資訊？有幾張現場照片？發文日期？`）。若任一標準不達標，換下一篇；全部候選都不達標，退回選官網／政府觀光頁，不勉強塞低品質連結。
+
+### Google Maps 連結的使用場景
 ```
-✅ MAP_DATA.markers[i].gm: https://maps.google.com/?q=景點名稱   （外開單點導航）
-✅ MAP_DATA.url: https://maps.google.com/maps/dir/A/B/C/D        （外開多點路線）
-❌ 不得出現在 TIMELINE[i].url 或 NEARBY[i].url
+✅ MAP_DATA.markers[i].gm: https://maps.google.com/?q=景點名稱   （外開單點導航，必用）
+✅ MAP_DATA.url: https://maps.google.com/maps/dir/A/B/C/D        （外開多點路線，必用）
+⚠️ TIMELINE[i].url / NEARBY[i].url：僅當找不到高品質部落格文章時作為備案
 ```
 
 ### 連結定位原則
