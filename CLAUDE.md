@@ -55,10 +55,15 @@
 #### URL 搜尋流程（每個地點必須逐一執行）
 
 1. **搜景點官方網站**（品牌官網、場館官網）→ 驗證回 200
-2. **搜 Wikipedia 條目**（`zh.wikipedia.org/wiki/景點名`）→ 驗證回 200
-3. **搜 Facebook 粉專**（`facebook.com/景點英文名`）→ 驗證回 200
-4. **搜 `.gov.tw` 觀光導覽頁** → 驗證回 200
-5. **以上都找不到**時，才可以用 Google Maps 連結（`maps.google.com/?q=景點名`）
+2. **搜知名部落格文章**（bobowin.blog、yoke918.tw、bonie.tw、yuki.tw 等）→ 用 `/?s=景點名` 搜尋 → 驗證回 200
+3. **搜 `.gov.tw` 觀光導覽頁** → 驗證回 200
+4. **以上都找不到**時，才可以用 Google Maps 連結（`maps.google.com/?q=景點名`）
+
+#### ❌ Facebook 連結（嚴禁使用！）
+- **禁止使用 Facebook 粉專連結作為景點 url！** Facebook 頁面經常被刪除、限制訪問或變更隱私設定
+- Facebook 對 curl 永遠回 HTTP 200（即使頁面已刪除），無法透過 HTTP 狀態碼驗證
+- 如果用 `web_fetch` 抓取 Facebook 頁面內容，會看到「目前無法查看此內容」但 curl 仍顯示 200
+- **替代方案**：用部落格文章、官方網站、政府觀光網站取代 Facebook 連結
 
 #### ❌ 絕對禁止的行為
 - **禁止 TIMELINE / NEARBY 的 `url` 欄位使用 Google Maps 連結**（`maps.google.com/?q=...`）— Google Maps 連結只能用在 MAP_DATA.markers 的 `gm` 欄位
@@ -69,8 +74,8 @@
 #### URL 欄位用途區分
 | 欄位 | 用途 | 允許的連結 |
 |------|------|-----------|
-| `TIMELINE[i].url` | 延伸閱讀（景點介紹） | 官網、Wikipedia、Facebook、.gov.tw |
-| `NEARBY[i].url` | 延伸閱讀（景點介紹） | 官網、Wikipedia、Facebook、.gov.tw |
+| `TIMELINE[i].url` | 延伸閱讀（景點介紹） | 部落格文章、官網、.gov.tw（❌ 禁止 Facebook） |
+| `NEARBY[i].url` | 延伸閱讀（景點介紹） | 部落格文章、官網、.gov.tw（❌ 禁止 Facebook） |
 | `MAP_DATA.markers[i].gm` | 地圖導航（Google Maps 外開） | `maps.google.com/?q=景點名` |
 | `MAP_DATA.url` | 完整路線導航 | `maps.google.com/maps/dir/A/B/C` |
 
@@ -84,10 +89,17 @@
 - 不要用 curl 測試 Google Maps embed URL（會回 404，但在瀏覽器 iframe 中正常）
 
 ### 部落格連結（關鍵！）
-- **禁止捏造 URL**：bobowin.blog 使用日期 slug（如 `2017-03-04-11`），不是主題 slug
-- 必須先用 `web_fetch` 搜尋部落格找真實文章 URL
-- 找不到時改用官方網站、Wikipedia 或 Facebook 粉專
+- **禁止捏造 URL**：bobowin.blog 使用日期 slug（如 `2017-03-04-11`）或主題 slug，必須先搜尋確認存在
+- 必須先用部落格內建搜尋（`/?s=景點名`）找到真實文章 URL
+- 如果部落格搜尋被封鎖（如 bjsmile.tw 會跳 Google captcha），改用 Yahoo 搜尋找到真實 URL
+- 找不到部落格文章時改用官方網站或 `.gov.tw` 觀光導覽頁
+- **禁止使用 Facebook 連結作為替代**（詳見上方 Facebook 連結規範）
 - 所有 URL 必須用 `curl -sL -o /dev/null -w "%{http_code}"` 驗證回 200
+
+### 餐廳資訊驗證（關鍵！）
+- 餐廳的**正式名稱、地址、電話**必須交叉驗證（用 Yahoo 搜尋、部落格文章、Google Maps 等多方確認）
+- **禁止憑印象填寫地址**：許多知名餐廳有搬遷或開新店，地址可能與常見認知不同
+- 範例：「大仁哥甕窯雞」常被誤以為在礁溪，實際正式名稱為「大仁哥蔗香脆皮桶仔雞」，旗艦店位於**壯圍鄉**不是礁溪
 
 ---
 
