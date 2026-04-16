@@ -57,14 +57,14 @@
     }
 
     function getWeekdayInfo(isoDate) {
-        if (!isoDate || isoDate === "--/--") return { text: "--", isWeekend: false };
+        if (!isoDate || isoDate === "--/--") return { text: "--", isWeekend: false, isToday: false };
         const p = isoDate.split("-");
-        if (p.length !== 3) return { text: "--", isWeekend: false };
+        if (p.length !== 3) return { text: "--", isWeekend: false, isToday: false };
         const d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
         const week = ["日", "一", "二", "三", "四", "五", "六"];
         const w = d.getDay();
-        if (Number.isNaN(w)) return { text: "--", isWeekend: false };
-        return { text: week[w], isWeekend: w === 0 || w === 6 };
+        if (Number.isNaN(w)) return { text: "--", isWeekend: false, isToday: false };
+        return { text: week[w], isWeekend: w === 0 || w === 6, isToday: isoDate === dateWithOffset(0) };
     }
 
     async function fetchForecast(lat, lon) {
@@ -294,7 +294,7 @@
                                         boxShadow: weekdayStyle.boxShadow
                                     }
                                 },
-                                "週" + weekdayInfo.text
+                                weekdayInfo.isToday ? "今天" : ("週" + weekdayInfo.text)
                             ),
                             React.createElement("span", { style: { fontSize: "0.8rem", color: "#e2e8f0", fontWeight: 600, letterSpacing: 0.3, minWidth: 44, textAlign: "right", fontVariantNumeric: "tabular-nums" } }, toMMDD(c.date))
                         ),
