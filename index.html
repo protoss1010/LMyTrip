@@ -8,6 +8,10 @@
     <meta name="description" content="所有旅行行程總覽 - 一站式查看所有旅遊攻略">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+    <script src="shared/weather.js"></script>
     <style>
         * {
             margin: 0;
@@ -185,6 +189,7 @@
         <h1>我的旅行計畫</h1>
         <p>所有行程攻略，一站查閱</p>
     </div>
+    <div id="home-weather-root"></div>
 
     <div class="trips-grid">
         <a class="trip-card" href="cruise-okinawa.html"
@@ -296,6 +301,56 @@
     <div class="footer">
         <p>✨ 持續更新中 — 新的旅行即將展開</p>
     </div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        const HOME_WEATHER_TRIPS = [
+            {
+                name: "🚢 郵輪沖繩",
+                note: "固定日期",
+                days: [
+                    { label: "DAY 1", lat: 25.132, lon: 121.745, place: "基隆港", date: "2026-06-15", color: "#2dd4bf" },
+                    { label: "DAY 2", lat: 26.202, lon: 127.680, place: "那霸", date: "2026-06-16", color: "#ff6b5a" },
+                    { label: "DAY 3", lat: 24.345, lon: 124.157, place: "石垣島", date: "2026-06-17", color: "#f59e0b" },
+                    { label: "DAY 4", lat: 25.132, lon: 121.745, place: "基隆港", date: "2026-06-18", color: "#06b6d4" }
+                ]
+            },
+            { name: "🏬 台中漢神", note: "未定日期", days: [{ lat: 24.184, lon: 120.650, place: "台中水湳", color: "#2dd4bf" }] },
+            { name: "🌹 苗栗兩日", note: "未定日期", days: [{ lat: 24.430, lon: 120.787, place: "三義／苑裡", color: "#2dd4bf" }] },
+            { name: "♨️ 宜蘭地熱", note: "未定日期", days: [{ lat: 24.622, lon: 121.607, place: "三星／清水地熱", color: "#2dd4bf" }] },
+            { name: "🍗 宜蘭甕窯雞", note: "未定日期", days: [{ lat: 24.770, lon: 121.800, place: "宜蘭壯圍", color: "#2dd4bf" }] },
+            { name: "🏃 平鎮運動", note: "未定日期", days: [{ lat: 24.944, lon: 121.216, place: "桃園平鎮", color: "#2dd4bf" }] }
+        ];
+
+        function HomeWeatherPanel() {
+            const [active, setActive] = useState(0);
+            const current = HOME_WEATHER_TRIPS[active];
+
+            return (
+                <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 20px 16px" }}>
+                    <div style={{ border: "1px solid rgba(45,212,191,0.18)", background: "rgba(30,41,59,0.7)", borderRadius: 16, padding: "12px 12px 6px", marginTop: 10 }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 8 }}>
+                            <div>
+                                <div style={{ fontSize: "0.95rem", color: "#2dd4bf", fontWeight: 800, letterSpacing: 1 }}>🌤️ 行程天氣快覽</div>
+                                <div style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.48)" }}>未標示日期行程顯示未來七天（含星期）</div>
+                            </div>
+                            <div style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.58)" }}>{current.note}</div>
+                        </div>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 8 }}>
+                            {HOME_WEATHER_TRIPS.map((trip, idx) => (
+                                <button key={trip.name} onClick={() => setActive(idx)} style={{ border: active === idx ? "1px solid #2dd4bf" : "1px solid rgba(255,255,255,0.16)", background: active === idx ? "rgba(45,212,191,0.16)" : "rgba(255,255,255,0.04)", color: active === idx ? "#2dd4bf" : "rgba(255,255,255,0.72)", borderRadius: 999, padding: "6px 10px", fontSize: "0.78rem", cursor: "pointer" }}>
+                                    {trip.name}
+                                </button>
+                            ))}
+                        </div>
+                        <WeatherStrip days={current.days} />
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("home-weather-root")).render(<HomeWeatherPanel />);
+    </script>
 </body>
 
 </html>

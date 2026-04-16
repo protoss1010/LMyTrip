@@ -14,6 +14,7 @@
     <script crossorigin
         src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+    <script src="shared/weather.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box }
         html { scroll-behavior: smooth }
@@ -33,6 +34,11 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useRef } = React;
+        const TRIP_META = {
+            days: [
+                { label: "DAY 1", lat: 24.77, lon: 121.8, place: "宜蘭壯圍", color: "#2dd4bf" }
+            ]
+        };
 
         // ─── 主色系（甕窯雞風格：火焰紅 × 炭烤橘 × 金黃脆皮） ───
         const COLORS = {
@@ -276,6 +282,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <WeatherStrip days={TRIP_META.days} />
 
                     {/* ─── NAV ─── */}
                     <div style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(10,22,40,0.95)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)", overflowX: "auto" }}>
