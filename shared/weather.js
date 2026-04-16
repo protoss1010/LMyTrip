@@ -261,13 +261,14 @@
                             key: "weather-card-" + idx,
                             style: {
                                 flex: "1 1 0",
-                                minWidth: 150,
-                                minHeight: 98,
+                                minWidth: 148,
+                                minHeight: 108,
                                 borderRadius: 12,
-                                background: "linear-gradient(160deg, rgba(255,255,255,0.05), " + (c.color || "#2dd4bf") + "10)",
-                                border: "1px solid rgba(255,255,255,0.09)",
+                                background: "rgba(255,255,255,0.04)",
+                                border: "1px solid rgba(255,255,255,0.08)",
                                 padding: "0.7rem 0.75rem",
-                                boxShadow: "0 8px 20px rgba(0,0,0,0.22)"
+                                boxShadow: "0 8px 20px rgba(0,0,0,0.22)",
+                                overflow: "hidden"
                             }
                         },
                         React.createElement(
@@ -297,16 +298,21 @@
                             ),
                             React.createElement("span", { style: { fontSize: "0.8rem", color: "#e2e8f0", fontWeight: 600, letterSpacing: 0.3, minWidth: 44, textAlign: "right", fontVariantNumeric: "tabular-nums" } }, toMMDD(c.date))
                         ),
-                        React.createElement("div", { style: { fontSize: "0.74rem", color: "rgba(255,255,255,0.72)", marginBottom: 6, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } }, "📍 ", c.place || "未指定地點"),
+                        React.createElement("div", { style: { fontSize: "0.74rem", color: "rgba(255,255,255,0.78)", marginBottom: 6, lineHeight: 1.3, minHeight: 19, overflowWrap: "anywhere" } }, "📍 ", c.place || "未指定地點"),
                         React.createElement(
                             "div",
-                            { style: { display: "flex", alignItems: "center", gap: 10 } },
-                            React.createElement("span", { style: { fontSize: "1.45rem", lineHeight: 1 } }, c.icon),
+                            { style: { display: "flex", alignItems: "center", gap: 8, minWidth: 0 } },
+                            React.createElement("span", { style: { fontSize: "1.4rem", lineHeight: 1, flexShrink: 0 } }, c.icon),
                             React.createElement(
                                 "div",
-                                null,
-                                React.createElement("div", { style: { fontSize: "0.84rem", fontWeight: 700, color: "#ffffff", whiteSpace: "nowrap", lineHeight: 1.25, fontVariantNumeric: "tabular-nums" } }, "↑", c.high, "°C  ↓", c.low, "°C"),
-                                React.createElement("div", { style: { fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", marginTop: 2, lineHeight: 1.2, fontVariantNumeric: "tabular-nums" } }, "💧 ", c.rain, "%")
+                                { style: { minWidth: 0 } },
+                                React.createElement(
+                                    "div",
+                                    { style: { display: "flex", gap: 6, alignItems: "baseline", flexWrap: "wrap", fontSize: "0.8rem", fontWeight: 700, color: "#ffffff", lineHeight: 1.2, fontVariantNumeric: "tabular-nums" } },
+                                    React.createElement("span", null, "↑", c.high, "°C"),
+                                    React.createElement("span", null, "↓", c.low, "°C")
+                                ),
+                                React.createElement("div", { style: { fontSize: "0.76rem", color: "rgba(255,255,255,0.74)", marginTop: 2, lineHeight: 1.2, fontVariantNumeric: "tabular-nums" } }, "💧 ", c.rain, "%")
                             )
                         )
                     );

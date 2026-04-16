@@ -26,6 +26,13 @@
             min-height: 100vh;
         }
 
+        :root {
+            --cruise-teal: #2dd4bf;
+            --cruise-coral: #ff6b5a;
+            --cruise-amber: #f59e0b;
+            --cruise-cyan: #06b6d4;
+        }
+
         .hero {
             text-align: center;
             padding: 60px 20px 40px;
@@ -40,7 +47,7 @@
         .hero h1 {
             font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #2dd4bf, #a78bfa);
+            background: linear-gradient(135deg, var(--cruise-teal), var(--cruise-coral), var(--cruise-amber));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -62,6 +69,8 @@
         }
 
         .trip-card {
+            --accent-from: var(--cruise-teal);
+            --accent-to: var(--cruise-coral);
             display: block;
             text-decoration: none;
             color: inherit;
@@ -192,8 +201,7 @@
     <div id="home-weather-root"></div>
 
     <div class="trips-grid">
-        <a class="trip-card" href="cruise-okinawa.html"
-            style="--accent-from: #38bdf8; --accent-to: #818cf8;">
+        <a class="trip-card" href="cruise-okinawa.html">
             <div class="card-header">
                 <div class="card-emoji">🚢</div>
                 <div class="card-info">
@@ -210,8 +218,7 @@
             <div class="card-arrow">→</div>
         </a>
 
-        <a class="trip-card" href="hanshin-day-trip.html"
-            style="--accent-from: #f472b6; --accent-to: #fb923c;">
+        <a class="trip-card" href="hanshin-day-trip.html">
             <div class="card-header">
                 <div class="card-emoji">🏬</div>
                 <div class="card-info">
@@ -227,8 +234,7 @@
             </div>
             <div class="card-arrow">→</div>
         </a>
-        <a class="trip-card" href="miaoli-2day-trip.html"
-            style="--accent-from: #16a34a; --accent-to: #7c3aed;">
+        <a class="trip-card" href="miaoli-2day-trip.html">
             <div class="card-header">
                 <div class="card-emoji">🌹</div>
                 <div class="card-info">
@@ -244,8 +250,7 @@
             </div>
             <div class="card-arrow">→</div>
         </a>
-        <a class="trip-card" href="yilan-day-trip.html"
-            style="--accent-from: #f97316; --accent-to: #eab308;">
+        <a class="trip-card" href="yilan-day-trip.html">
             <div class="card-header">
                 <div class="card-emoji">♨️</div>
                 <div class="card-info">
@@ -261,17 +266,16 @@
             </div>
             <div class="card-arrow">→</div>
         </a>
-        <a class="trip-card" href="yilan-chicken-trip.html"
-            style="--accent-from: #dc2626; --accent-to: #fbbf24;">
+        <a class="trip-card" href="yilan-chicken-trip.html">
             <div class="card-header">
                 <div class="card-emoji">🍗</div>
                 <div class="card-info">
-                    <div class="card-title">宜蘭大仁哥甕窯雞一日遊（8大三代同遊）</div>
+                    <div class="card-title">宜蘭大仁哥甕窯雞一日遊（8大5小同遊）</div>
                     <div class="card-subtitle">北部3車自駕輕鬆遊 · 大仁哥甕窯雞＋幸福20號農場＋羅東夜市</div>
                 </div>
             </div>
             <div class="card-tags">
-                <span class="tag">👨‍👩‍👧‍👦 8大同遊</span>
+                <span class="tag">👨‍👩‍👧‍👦 8大5小</span>
                 <span class="tag">🍗 甕窯雞</span>
                 <span class="tag">🌿 幸福20號</span>
                 <span class="tag">🍜 羅東夜市</span>
@@ -279,8 +283,7 @@
             <div class="card-arrow">→</div>
         </a>
 
-        <a class="trip-card" href="pingzhen-day-trip.html"
-            style="--accent-from: #10b981; --accent-to: #f59e0b;">
+        <a class="trip-card" href="pingzhen-day-trip.html">
             <div class="card-header">
                 <div class="card-emoji">🏃</div>
                 <div class="card-info">
