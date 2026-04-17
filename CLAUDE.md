@@ -11,6 +11,7 @@
 ### 技術架構
 - 單檔 HTML + React 18 + Babel（CDN 載入，無建置步驟）
 - 所有資料與元件都 inline 在 `<script type="text/babel">` 區塊
+- Hero 區只保留標題與簡短摘要，不要再生成大顆 badge / pill 快覽膠囊
 
 ---
 
@@ -34,7 +35,7 @@
 #### ❌ 絕對禁止的行為
 - **禁止隨便拿一張 Unsplash 圖就塞進去**（例如：藥品照片放蛋糕工廠、試管照片放釀造廠）
 - **禁止用同一張 Unsplash 圖用在多個不同地點**
-- 禁止使用任何旅遊局（`travel.xxx.tw`）、部落格的圖片
+- 禁止使用任何旅遊局（`travel.xxx.tw`）的圖片
 
 #### ✅ 允許的圖片來源
 - ✅ Wikipedia Commons：`upload.wikimedia.org/wikipedia/commons/thumb/...`（優先！）

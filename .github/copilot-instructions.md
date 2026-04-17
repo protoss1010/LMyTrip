@@ -37,7 +37,7 @@ const { useState, useRef } = React;
 
 | 順序 | 區塊 | Tab ID | 說明 |
 |------|------|--------|------|
-| 1 | Hero Banner | — | 漸層背景＋標題＋人數/交通/亮點快覽 |
+| 1 | Hero Banner | — | 漸層背景＋標題＋一句式行程摘要（不要大顆 badge / pill 快覽） |
 | 2 | Sticky Nav | — | 固定在頂部的分頁按鈕列 |
 | 3 | 行程時間軸 | `itinerary` | 路線摘要卡片 + TimelineCard 元件列表 |
 | 4 | 路線地圖 | `maps` | **Google Maps iframe embed** 互動地圖面板 + 交通資訊 |
@@ -117,7 +117,6 @@ const ts = {
 ### ❌ 絕對禁止的圖片來源
 
 - `travel.yilan.tw`、`travel.xxx.tw`（政府觀光網站，會封鎖外連）
-- 任何部落格圖片（隨時會搬遷或刪除）
 - Google Maps 截圖
 - 任何非 CDN 的第三方圖片
 
@@ -430,7 +429,7 @@ const CHECKLIST = {
 ### 圖片檢查
 - [ ] 所有圖片來源只使用 Unsplash 或 Wikipedia Commons
 - [ ] 每張圖片都用 `web_fetch` 驗證能返回影像二進位資料
-- [ ] 不存在任何 `travel.xxx.tw` 或部落格的圖片 URL
+- [ ] 不存在任何 `travel.xxx.tw` 圖片 URL
 
 ### 地圖檢查
 - [ ] 使用 Google Maps iframe embed（`output=embed`）
@@ -464,7 +463,7 @@ const CHECKLIST = {
 - [ ] 定義了專屬 COLORS 色系
 - [ ] 打包清單使用淺色暖色背景
 - [ ] Sticky nav 有 backdrop-filter blur
-- [ ] Hero 有漸層背景和快覽指標
+- [ ] Hero 有漸層背景與精簡摘要，不使用大顆 badge / pill 快覽
 
 ---
 
